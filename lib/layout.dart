@@ -7,7 +7,7 @@ class Layout {
     return Text(
       title,
       style: TextStyle(
-        color: Colors.pink.shade800,
+        color: Color.fromARGB(255, 212, 212, 212),
         fontWeight: FontWeight.bold,
         fontSize: 40,
       ),
