@@ -64,9 +64,9 @@ class MyStatelessWidget extends StatelessWidget {
           )
         ],
       ),
-      backgroundColor: Color.fromARGB(255, 60, 60, 60),
+      backgroundColor: Color.fromARGB(255, 51, 51, 51),
+      elevation: 0,
       bottom: TabBar(
-        // labelColor: Color.fromARGB(255, 244, 244, 244),
         unselectedLabelColor: Color.fromARGB(255, 150, 150, 150),
         indicatorSize: TabBarIndicatorSize.tab,
         indicator: BoxDecoration(color: Color.fromARGB(255, 30, 30, 30)),
@@ -89,55 +89,109 @@ class MyStatelessWidget extends StatelessWidget {
                 ),
               ),
             ),
-          // Tab(
-          //   child: Align(
-          //     alignment: Alignment.center,
-          //     child: Text("APPS"),
-          //   ),
-          // ),
         ],
       ),
-
-      //     TabBar(
-      // labelColor: Colors.red,
-      // unselectedLabelColor: Colors.yellow,
-      // isScrollable: true,
-      // indicatorColor: Color.fromARGB(255, 60, 60, 60),
-      // tabs: <Widget>[
-      //   for (int i = 0; i < contents.length; i++)
-      //     Tab(
-      //       iconMargin: EdgeInsets.all(0),
-      //       icon: Expanded(
-      //         child: Container(
-      //           child: Row(
-      //             children: <Widget>[
-      //               contents[i]["icon"],
-      //               Padding(padding: EdgeInsets.all(10)),
-      //               contents[i]["title"],
-      //             ],
-      //           ),
-      //           color: Colors.green,
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget leftBar() {
+      return Column(
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.file_copy_outlined,
+                    color: Color.fromARGB(255, 133, 133, 133),
+                    size: 30,
+                  ),
+                  Padding(padding: EdgeInsets.all(15)),
+                  Icon(
+                    Icons.search,
+                    color: Color.fromARGB(255, 133, 133, 133),
+                    size: 30,
+                  ),
+                  Padding(padding: EdgeInsets.all(15)),
+                  Icon(
+                    Icons.bug_report,
+                    color: Color.fromARGB(255, 133, 133, 133),
+                    size: 30,
+                  ),
+                ],
+              ),
+              color: Color.fromARGB(255, 51, 51, 51),
+              width: 50,
+            ),
+          ),
+        ],
+      );
+    }
+
+    final PageController controller = PageController(initialPage: 0);
     return DefaultTabController(
       initialIndex: 0,
       length: contents.length,
       child: Scaffold(
         appBar: appBarMain(),
-        body: TabBarView(
+        // body: TabBarView(
+        //   children: <Widget>[
+        body: Row(
           children: <Widget>[
-            for (int i = 0; i < contents.length; i++) contents[i]["content"]
+            leftBar(),
+            // PageView(
+            //   scrollDirection: Axis.horizontal,
+            //   controller: controller,
+            //   children: <Widget>[
+            //     for (int i = 0; i < contents.length; i++) contents[i]["content"],
+            //   ],
+            // ),
+            Expanded(
+              child: Container(
+                child: Card(
+                  color: Color.fromARGB(255, 30, 30, 30),
+                  child: Text('introduce'),
+                ),
+                height: 25,
+                decoration: BoxDecoration(
+                  border: Border(bottom: BorderSide(color: Colors.black)),
+                ),
+              ),
+            ),
           ],
+          crossAxisAlignment: CrossAxisAlignment.start,
         ),
+        // ],
+        // ),
         backgroundColor: Color.fromARGB(255, 30, 30, 30),
+        bottomNavigationBar: BottomAppBar(
+          // shape: const CircularNotchedRectangle(),
+          child: Container(
+            height: 20.0,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    height: 20,
+                    color: Color.fromARGB(255, 22, 130, 93),
+                    child: Text("aaa"),
+                  ),
+                ),
+                Expanded(
+                  flex: 10,
+                  child: Container(
+                    height: 20,
+                    color: Color.fromARGB(255, 0, 122, 204),
+                    child: Text("bbb"),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
