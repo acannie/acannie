@@ -20,41 +20,52 @@ class Introduce extends StatelessWidget {
   Widget build(BuildContext context) {
     Layout layout = Layout();
     return SingleChildScrollView(
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            Padding(padding: EdgeInsets.all(30)),
-            Text("Introduce"),
-            Padding(padding: EdgeInsets.all(20)),
-            Container(
-              width: 300.0,
-              height: 300.0,
-              alignment: Alignment.center,
-              decoration: new BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('acannie.jpg'),
-                  fit: BoxFit.fill,
-                ),
-                border: Border.all(color: Colors.pink.shade500, width: 5),
-              ),
-            ),
-            Padding(padding: EdgeInsets.all(20)),
-            layout.titleText("名前"),
-            Text("笹岡 茜 / Sasaoka Akane"),
-            Text(Utils().oldness().toString() + "歳"),
-            Padding(padding: EdgeInsets.all(20)),
-            layout.titleText("出身"),
-            Text("北陸生まれの北陸育ちです。"),
-            Padding(padding: EdgeInsets.all(20)),
-            layout.titleText("学歴"),
-            layout.historyTable(educationalBackground),
-            Padding(padding: EdgeInsets.all(20)),
-            layout.titleText("職歴"),
-            layout.historyTable(workHistory),
-            Padding(padding: EdgeInsets.all(30)),
-          ],
-        ),
-      ),
+      // child: Center(
+      child: Row(children: [
+        Column(children: [
+          for (var i = 0; i < 50; i++)
+            Text("${i + 1}",
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                    color: Color.fromARGB(255, 133, 133, 133), fontSize: 15)),
+        ]),
+        // Text(
+        //   "aas\nb\nfga\nbjg\nl\nj\nk\nn\na\ne\nl\nkrj\n lia\n jerla\njlk\nfnak\nlnv\nalknglknsg\n\nl\n\naaaa",
+        //   style: TextStyle(color: Colors.white, fontSize: 50),
+        // ),
+      ]),
+
+      // Padding(padding: EdgeInsets.all(30)),
+      // Text("Introduce"),
+      // Padding(padding: EdgeInsets.all(20)),
+      // Container(
+      //   width: 300.0,
+      //   height: 300.0,
+      //   alignment: Alignment.center,
+      //   decoration: new BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage('acannie.jpg'),
+      //       fit: BoxFit.fill,
+      //     ),
+      //     border: Border.all(color: Colors.pink.shade500, width: 5),
+      //   ),
+      // ),
+      // Padding(padding: EdgeInsets.all(20)),
+      // layout.titleText("名前"),
+      // Text("笹岡 茜 / Sasaoka Akane"),
+      // Text(Utils().oldness().toString() + "歳"),
+      // Padding(padding: EdgeInsets.all(20)),
+      // layout.titleText("出身"),
+      // Text("北陸生まれの北陸育ちです。"),
+      // Padding(padding: EdgeInsets.all(20)),
+      // layout.titleText("学歴"),
+      // layout.historyTable(educationalBackground),
+      // Padding(padding: EdgeInsets.all(20)),
+      // layout.titleText("職歴"),
+      // layout.historyTable(workHistory),
+      // Padding(padding: EdgeInsets.all(30)),
+
+      // ),
     );
   }
 }

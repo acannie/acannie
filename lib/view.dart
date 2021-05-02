@@ -96,6 +96,12 @@ class MyStatelessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<IconData> icons = [
+      Icons.file_copy_outlined,
+      Icons.search,
+      Icons.bug_report,
+    ];
+
     Widget leftBar() {
       return Column(
         children: <Widget>[
@@ -103,23 +109,21 @@ class MyStatelessWidget extends StatelessWidget {
             child: Container(
               child: Column(
                 children: [
-                  Icon(
-                    Icons.file_copy_outlined,
-                    color: Color.fromARGB(255, 133, 133, 133),
-                    size: 30,
-                  ),
-                  Padding(padding: EdgeInsets.all(15)),
-                  Icon(
-                    Icons.search,
-                    color: Color.fromARGB(255, 133, 133, 133),
-                    size: 30,
-                  ),
-                  Padding(padding: EdgeInsets.all(15)),
-                  Icon(
-                    Icons.bug_report,
-                    color: Color.fromARGB(255, 133, 133, 133),
-                    size: 30,
-                  ),
+                  for (var i = 0; i < icons.length; i++)
+                    Column(
+                      children: [
+                        InkWell(
+                          hoverColor: Colors.white,
+                          child: Icon(
+                            icons[i],
+                            color: Color.fromARGB(255, 133, 133, 133),
+                            size: 30,
+                          ),
+                          onTap: () {},
+                        ),
+                        Padding(padding: EdgeInsets.all(15)),
+                      ],
+                    )
                 ],
               ),
               color: Color.fromARGB(255, 51, 51, 51),
@@ -148,18 +152,23 @@ class MyStatelessWidget extends StatelessWidget {
             //     for (int i = 0; i < contents.length; i++) contents[i]["content"],
             //   ],
             // ),
-            Expanded(
-              child: Container(
-                child: Card(
-                  color: Color.fromARGB(255, 30, 30, 30),
-                  child: Text('introduce'),
-                ),
-                height: 25,
-                decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(color: Colors.black)),
-                ),
-              ),
-            ),
+            // Column(
+            //   children: [
+            // Expanded(
+            //   child: Container(
+            //     child: Card(
+            //       color: Color.fromARGB(255, 30, 30, 30),
+            //       child: Text('introduce'),
+            //     ),
+            //     height: 25,
+            //     decoration: BoxDecoration(
+            //       border: Border(bottom: BorderSide(color: Colors.black)),
+            //     ),
+            //   ),
+            // ),
+            contents[0]["content"],
+            //   ],
+            // )
           ],
           crossAxisAlignment: CrossAxisAlignment.start,
         ),
