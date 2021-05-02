@@ -33,7 +33,7 @@ class Introduce extends StatelessWidget {
             alignment: Alignment.center,
             decoration: new BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('acannie.jpg'),
+                image: AssetImage('assets/acannie.jpg'),
                 fit: BoxFit.fill,
               ),
               border: Border.all(color: Colors.pink.shade500, width: 5),

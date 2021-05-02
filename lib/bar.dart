@@ -15,7 +15,7 @@ class BarWidgetClass {
         title: Row(
           children: [
             Container(
-              child: Flexible(child: Image.asset("wn_icon.png")),
+              child: Flexible(child: Image.asset("assets/wn_icon.png")),
               width: 30,
             ),
             Padding(padding: EdgeInsets.only(left: 20)),
