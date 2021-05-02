@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'layout.dart';
 import 'introduce.dart';
 // import 'contact.dart';
 // import 'works.dart';
@@ -25,7 +26,7 @@ class MyStatelessWidget extends StatelessWidget {
                 Container(
                   height: 40,
                   child: Container(
-                    color: Colors.green,
+                    color: Layout.tabBarBg,
                     child: BarWidgetClass().tabBar(),
                   ),
                 ),
@@ -33,7 +34,7 @@ class MyStatelessWidget extends StatelessWidget {
                   flex: 20,
                   child: Container(
                     child: Introduce(),
-                    color: Colors.yellow,
+                    color: Layout.tabBarActiveBg,
                   ),
                 ),
               ],
