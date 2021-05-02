@@ -14,9 +14,11 @@ class BarWidgetClass {
       child: AppBar(
         title: Row(
           children: [
-            Container(
-              child: Flexible(child: Image.asset("assets/wn_icon.png")),
-              width: 30,
+            Flexible(
+              child: Container(
+                child: Image.asset("assets/wn_icon.png"),
+                width: 30,
+              ),
             ),
             Padding(padding: EdgeInsets.only(left: 20)),
             Text(
@@ -114,27 +116,25 @@ class BarWidgetClass {
     return Container(
       color: Layout.leftBarBg,
       width: 50,
-      child: Expanded(
-        child: Column(
-          children: [
-            Padding(padding: EdgeInsets.all(10)),
-            for (var i = 0; i < icons.length; i++)
-              Column(
-                children: [
-                  InkWell(
-                    hoverColor: Colors.white,
-                    child: Icon(
-                      icons[i],
-                      color: Color.fromARGB(255, 133, 133, 133),
-                      size: 30,
-                    ),
-                    onTap: () {},
+      child: Column(
+        children: [
+          Padding(padding: EdgeInsets.all(10)),
+          for (var i = 0; i < icons.length; i++)
+            Column(
+              children: [
+                InkWell(
+                  hoverColor: Colors.white,
+                  child: Icon(
+                    icons[i],
+                    color: Color.fromARGB(255, 133, 133, 133),
+                    size: 30,
                   ),
-                  Padding(padding: EdgeInsets.all(15)),
-                ],
-              ),
-          ],
-        ),
+                  onTap: () {},
+                ),
+                Padding(padding: EdgeInsets.all(15)),
+              ],
+            ),
+        ],
       ),
     );
   }
