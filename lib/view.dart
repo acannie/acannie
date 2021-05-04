@@ -3,13 +3,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'layout.dart';
+import 'content.dart';
 import 'introduce.dart';
 import 'contact.dart';
 import 'works.dart';
 import 'favorite.dart';
 import 'bar.dart';
 
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -125,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage>
                           children: <Widget>[
                             for (int i = 0; i < contents.length; i++)
                               Container(
-                                child: contents[i]["content"],
+                                child: ContentView(contents[i]["content"]),
                                 color: Layout.tabBarActiveBg,
                               ),
                           ],

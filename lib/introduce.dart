@@ -20,77 +20,40 @@ class Introduce extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget intro() {
-      return Container(
-        child: Column(
-          children: [
-            Padding(padding: EdgeInsets.all(30)),
-            Text("Introduce"),
-            Padding(padding: EdgeInsets.all(20)),
-            Container(
-              width: 300.0,
-              height: 300.0,
-              alignment: Alignment.center,
-              decoration: new BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/acannie.jpg'),
-                  fit: BoxFit.fill,
-                ),
-                border: Border.all(color: Colors.pink.shade500, width: 5),
+    return Container(
+      child: Column(
+        children: [
+          Padding(padding: EdgeInsets.all(30)),
+          Text("Introduce"),
+          Padding(padding: EdgeInsets.all(20)),
+          Container(
+            width: 300.0,
+            height: 300.0,
+            alignment: Alignment.center,
+            decoration: new BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/acannie.jpg'),
+                fit: BoxFit.fill,
               ),
+              border: Border.all(color: Colors.pink.shade500, width: 5),
             ),
-            Padding(padding: EdgeInsets.all(20)),
-            Layout.titleText("名前"),
-            Layout.sentenceText("笹岡 茜 / Sasaoka Akane"),
-            Layout.sentenceText(Utils().oldness().toString() + "歳"),
-            Padding(padding: EdgeInsets.all(20)),
-            Layout.titleText("出身"),
-            Layout.sentenceText("北陸生まれの北陸育ちです。"),
-            Padding(padding: EdgeInsets.all(20)),
-            Layout.titleText("学歴"),
-            Layout().historyTable(educationalBackground),
-            Padding(padding: EdgeInsets.all(20)),
-            Layout.titleText("職歴"),
-            Layout().historyTable(workHistory),
-            Padding(padding: EdgeInsets.all(30)),
-          ],
-        ),
-      );
-    }
-
-    return ListView(
-      scrollDirection: Axis.vertical,
-      children: <Widget>[
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              children: [
-                for (var i = 0; i < 100; i++)
-                  Container(
-                    width: 40,
-                    padding: EdgeInsets.only(top: 2, left: 20, bottom: 2),
-                    color: Layout.tabBarActiveBg,
-                    child: Text(
-                      "${i + 1}",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                          color: Layout.lineIndexNonActiveLabel,
-                          fontSize: 15,
-                          fontFeatures: [
-                            FontFeature.tabularFigures(),
-                          ]),
-                    ),
-                  ),
-              ],
-            ),
-            intro(),
-            // Expanded(
-            //   child: Image.asset("wn_icon.png"),
-            // ),
-          ],
-        )
-      ],
+          ),
+          Padding(padding: EdgeInsets.all(20)),
+          Layout.titleText("名前"),
+          Layout.sentenceText("笹岡 茜 / Sasaoka Akane"),
+          Layout.sentenceText(Utils().oldness().toString() + "歳"),
+          Padding(padding: EdgeInsets.all(20)),
+          Layout.titleText("出身"),
+          Layout.sentenceText("北陸生まれの北陸育ちです。"),
+          Padding(padding: EdgeInsets.all(20)),
+          Layout.titleText("学歴"),
+          Layout().historyTable(educationalBackground),
+          Padding(padding: EdgeInsets.all(20)),
+          Layout.titleText("職歴"),
+          Layout().historyTable(workHistory),
+          Padding(padding: EdgeInsets.all(30)),
+        ],
+      ),
     );
   }
 }
