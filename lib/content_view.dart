@@ -40,6 +40,7 @@ class ContentView extends StatelessWidget {
                   ),
               ],
             ),
+            Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
             Expanded(child: this.content!),
           ],
         )
