@@ -20,9 +20,8 @@ class Introduce extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget intro() {
-      return Expanded(
-          child: Column(
+    return Container(
+      child: Column(
         children: [
           Padding(padding: EdgeInsets.all(30)),
           Text("Introduce"),
@@ -54,42 +53,7 @@ class Introduce extends StatelessWidget {
           Layout().historyTable(workHistory),
           Padding(padding: EdgeInsets.all(30)),
         ],
-      ));
-    }
-
-    return ListView(
-      scrollDirection: Axis.vertical,
-      children: <Widget>[
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              children: [
-                for (var i = 0; i < 100; i++)
-                  Container(
-                    width: 40,
-                    padding: EdgeInsets.only(top: 2, left: 20, bottom: 2),
-                    color: Layout.tabBarActiveBg,
-                    child: Text(
-                      "${i + 1}",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                          color: Layout.lineIndexNonActiveLabel,
-                          fontSize: 15,
-                          fontFeatures: [
-                            FontFeature.tabularFigures(),
-                          ]),
-                    ),
-                  ),
-              ],
-            ),
-            intro(),
-            // Expanded(
-            //   child: Image.asset("wn_icon.png"),
-            // ),
-          ],
-        )
-      ],
+      ),
     );
   }
 }
