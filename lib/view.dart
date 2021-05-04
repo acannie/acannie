@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'layout.dart';
-import 'content.dart';
+import 'content_view.dart';
 import 'introduce.dart';
 import 'contact.dart';
 import 'works.dart';
