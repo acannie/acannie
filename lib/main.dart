@@ -1,20 +1,37 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
+// import 'view.dart';
+
+// void main() => runApp(const MyApp());
+
+// /// This is the main application widget.
+// class MyApp extends StatelessWidget {
+//   const MyApp({Key? key}) : super(key: key);
+
+//   static const String _title = 'Acannie\'s HomePage';
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: _title,
+//       home: MyHomePage(),
+//     );
+//   }
+// }
+
+import 'package:flutter/material.dart';
 import 'view.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(new MyApp());
+}
 
-/// This is the main application widget.
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  static const String _title = 'Acannie\'s HomePage';
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: _title,
-      home: MyStatelessWidget(),
+    return new MaterialApp(
+      title: 'Flutter Demo',
+      home: new MyHomePage(),
     );
   }
 }
