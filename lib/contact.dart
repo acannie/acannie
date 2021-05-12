@@ -4,11 +4,11 @@ import 'package:url_launcher/url_launcher.dart';
 import 'layout.dart';
 
 class SnsInfo {
-  final String? imagePath;
-  final String? name;
-  final String? url;
+  final String imagePath;
+  final String name;
+  final String url;
 
-  SnsInfo({this.imagePath, this.name, this.url});
+  SnsInfo({required this.imagePath, required this.name, required this.url});
 }
 
 // 自己紹介
@@ -76,10 +76,10 @@ class Contact extends StatelessWidget {
             Column(
               children: [
                 InkWell(
-                  onTap: () => _launchURL(snsAccount.url!),
+                  onTap: () => _launchURL(snsAccount.url),
                   child: snsWithLogo(
-                    snsAccount.imagePath!,
-                    snsAccount.name!,
+                    snsAccount.imagePath,
+                    snsAccount.name,
                   ),
                 ),
                 Padding(padding: EdgeInsets.all(20)),
