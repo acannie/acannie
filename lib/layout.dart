@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
+class History {
+  String when;
+  String event;
+
+  History({required this.when, required this.event});
+}
 
 // レイアウト
 class Layout {
@@ -38,27 +44,46 @@ class Layout {
     );
   }
 
-  static Widget historyTable(List<Map<String, String>> history) {
-    return Column(
-      children: <Widget>[
-        for (int i = 0; i < history.length; i++)
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(history[i]["when"]!),
-                Text(history[i]["event"]!),
-                // Flexible(
-                //   flex: 1,
-                //   child: Container(
-                //     color: Colors.blue,
-                //     child: Text('Flexible\n\n(flex:1)'),
-                //   ),
-                // ),
+  static Widget historyTable(List<History> histories) {
+    return Container(
+      width: 500,
+      child: Table(
+        columnWidths: const <int, TableColumnWidth>{
+          0: IntrinsicColumnWidth(),
+          1: FlexColumnWidth(),
+        },
+        children: <TableRow>[
+          for (History history in histories)
+            TableRow(
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      history.when,
+                      style: TextStyle(
+                        color: contentChar,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  flex: 5,
+                  child: Text(
+                    history.event,
+                    style: TextStyle(
+                      color: contentChar,
+                      fontSize: 20,
+                    ),
+                    overflow: TextOverflow.visible,
+                  ),
+                ),
               ],
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }
