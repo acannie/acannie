@@ -98,16 +98,28 @@ class _MyHomePageState extends State<MyHomePage>
                           tabs: [
                             for (int i = 0; i < contents.length; i++)
                               Tab(
-                                icon: Row(
-                                  children: [
-                                    Padding(padding: EdgeInsets.all(7)),
-                                    contents[i]["icon"],
-                                    Padding(padding: EdgeInsets.all(3)),
-                                    Text(
-                                      contents[i]["title"],
+                                icon: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      right: BorderSide(color: Layout.tabBarBg),
                                     ),
-                                    Padding(padding: EdgeInsets.all(20)),
-                                  ],
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.all(7),
+                                      ),
+                                      contents[i]["icon"],
+                                      Padding(
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 3),
+                                      ),
+                                      Text(
+                                        contents[i]["title"],
+                                      ),
+                                      Padding(padding: EdgeInsets.all(25)),
+                                    ],
+                                  ),
                                 ),
                               ),
                           ],

@@ -38,7 +38,7 @@ class Layout {
     );
   }
 
-  Widget historyTable(List<Map<String, String>> history) {
+  static Widget historyTable(List<Map<String, String>> history) {
     return Column(
       children: <Widget>[
         for (int i = 0; i < history.length; i++)
