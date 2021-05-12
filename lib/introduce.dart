@@ -28,15 +28,11 @@ class Introduce extends StatelessWidget {
           Padding(padding: EdgeInsets.all(20)),
           Container(
             width: 300.0,
-            height: 300.0,
             alignment: Alignment.center,
             decoration: new BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/acannie.jpg'),
-                fit: BoxFit.fill,
-              ),
               border: Border.all(color: Colors.pink.shade500, width: 5),
             ),
+            child: Image(image: AssetImage('assets/acannie.jpg')),
           ),
           Padding(padding: EdgeInsets.all(20)),
           Layout.titleText("名前"),
