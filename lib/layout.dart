@@ -39,38 +39,45 @@ class Layout {
   }
 
   static Widget historyTable(List<Map<String, String>> history) {
-    return Column(
-      children: <Widget>[
-        for (int i = 0; i < history.length; i++)
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  history[i]["when"]!,
-                  style: TextStyle(
-                    color: contentChar,
-                    fontSize: 20,
+    return Container(
+      width: 500,
+      child: Table(
+        columnWidths: const <int, TableColumnWidth>{
+          0: IntrinsicColumnWidth(),
+          1: FlexColumnWidth(),
+        },
+        children: <TableRow>[
+          for (int i = 0; i < history.length; i++)
+            TableRow(
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      history[i]["when"]!,
+                      style: TextStyle(
+                        color: contentChar,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
                 ),
-                Text(
-                  history[i]["event"]!,
-                  style: TextStyle(
-                    color: contentChar,
-                    fontSize: 20,
+                Flexible(
+                  flex: 5,
+                  child: Text(
+                    history[i]["event"]!,
+                    style: TextStyle(
+                      color: contentChar,
+                      fontSize: 20,
+                    ),
+                    overflow: TextOverflow.visible,
                   ),
                 ),
-                // Flexible(
-                //   flex: 1,
-                //   child: Container(
-                //     color: Colors.blue,
-                //     child: Text('Flexible\n\n(flex:1)'),
-                //   ),
-                // ),
               ],
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }
