@@ -7,6 +7,7 @@ import 'content_view.dart';
 import 'introduce.dart';
 import 'contact.dart';
 import 'works.dart';
+import 'engineering.dart';
 import 'favorite.dart';
 import 'bar.dart';
 
@@ -55,6 +56,15 @@ class _MyHomePageState extends State<MyHomePage>
       ),
       "title": "Works",
       "content": Works(),
+    },
+    {
+      "icon": Icon(
+        Icons.computer,
+        color: Color.fromARGB(255, 81, 154, 186),
+        size: 15,
+      ),
+      "title": "Engineering",
+      "content": Engineering(),
     },
     {
       "icon": Icon(
