@@ -7,29 +7,37 @@ import 'package:url_launcher/url_launcher.dart';
 import 'utils.dart';
 import 'layout.dart';
 
+class SnsInfo {
+  final String? imagePath;
+  final String? name;
+  final String? url;
+
+  SnsInfo({this.imagePath, this.name, this.url});
+}
+
 // 自己紹介
 class Contact extends StatelessWidget {
-  List<Map<String, String>> snsAccounts = [
-    {
-      'imagePath': 'assets/facebook.png',
-      'name': 'Facebook',
-      'url': 'https://www.facebook.com/made.in.akane'
-    },
-    {
-      'imagePath': 'assets/github.png',
-      'name': 'GitHub',
-      'url': 'https://github.com/acannie'
-    },
-    {
-      'imagePath': 'assets/linkedin.png',
-      'name': 'LinkedIn',
-      'url': 'https://www.linkedin.com/in/akane-sasaoka/'
-    },
-    {
-      'imagePath': 'assets/twitter.png',
-      'name': 'Twitter',
-      'url': 'https://twitter.com/CO_KEISAN_SKILL'
-    },
+  List<SnsInfo> snsAccounts = [
+    SnsInfo(
+      imagePath: 'assets/facebook.png',
+      name: 'Facebook',
+      url: 'https://www.facebook.com/made.in.akane',
+    ),
+    SnsInfo(
+      imagePath: 'assets/github.png',
+      name: 'GitHub',
+      url: 'https://github.com/acannie',
+    ),
+    SnsInfo(
+      imagePath: 'assets/linkedin.png',
+      name: 'LinkedIn',
+      url: 'https://www.linkedin.com/in/akane-sasaoka/',
+    ),
+    SnsInfo(
+      imagePath: 'assets/twitter.png',
+      name: 'Twitter',
+      url: 'https://twitter.com/CO_KEISAN_SKILL',
+    ),
   ];
 
   void _launchURL(String url) async {
@@ -72,10 +80,10 @@ class Contact extends StatelessWidget {
             Column(
               children: [
                 InkWell(
-                  onTap: () => _launchURL(snsAccount['url']!),
+                  onTap: () => _launchURL(snsAccount.url!),
                   child: snsWithLogo(
-                    snsAccount['imagePath']!,
-                    snsAccount['name']!,
+                    snsAccount.imagePath!,
+                    snsAccount.name!,
                   ),
                 ),
                 Padding(padding: EdgeInsets.all(20)),
