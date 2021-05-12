@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
+class History {
+  String when;
+  String event;
+
+  History({required this.when, required this.event});
+}
 
 // レイアウト
 class Layout {
@@ -38,7 +44,7 @@ class Layout {
     );
   }
 
-  static Widget historyTable(List<Map<String, String>> history) {
+  static Widget historyTable(List<History> histories) {
     return Container(
       width: 500,
       child: Table(
@@ -47,7 +53,7 @@ class Layout {
           1: FlexColumnWidth(),
         },
         children: <TableRow>[
-          for (int i = 0; i < history.length; i++)
+          for (History history in histories)
             TableRow(
               children: [
                 Flexible(
@@ -55,7 +61,7 @@ class Layout {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
-                      history[i]["when"]!,
+                      history.when,
                       style: TextStyle(
                         color: contentChar,
                         fontSize: 20,
@@ -66,7 +72,7 @@ class Layout {
                 Flexible(
                   flex: 5,
                   child: Text(
-                    history[i]["event"]!,
+                    history.event,
                     style: TextStyle(
                       color: contentChar,
                       fontSize: 20,
