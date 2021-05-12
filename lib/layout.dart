@@ -46,8 +46,20 @@ class Layout {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(history[i]["when"]!),
-                Text(history[i]["event"]!),
+                Text(
+                  history[i]["when"]!,
+                  style: TextStyle(
+                    color: contentChar,
+                    fontSize: 20,
+                  ),
+                ),
+                Text(
+                  history[i]["event"]!,
+                  style: TextStyle(
+                    color: contentChar,
+                    fontSize: 20,
+                  ),
+                ),
                 // Flexible(
                 //   flex: 1,
                 //   child: Container(

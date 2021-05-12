@@ -24,7 +24,7 @@ class Introduce extends StatelessWidget {
       child: Column(
         children: [
           Padding(padding: EdgeInsets.all(30)),
-          Text("Introduce"),
+          Layout.titleText("Introduce"),
           Padding(padding: EdgeInsets.all(20)),
           Container(
             width: 300.0,
