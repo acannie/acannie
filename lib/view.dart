@@ -117,21 +117,14 @@ class _MyHomePageState extends State<MyHomePage>
                   ),
                 ),
                 Expanded(
-                  child: ListView(
+                  child: TabBarView(
+                    controller: _controller,
                     children: <Widget>[
-                      Container(
-                        height: 5000,
-                        child: TabBarView(
-                          controller: _controller,
-                          children: <Widget>[
-                            for (int i = 0; i < contents.length; i++)
-                              Container(
-                                child: ContentView(contents[i]["content"]),
-                                color: Layout.tabBarActiveBg,
-                              ),
-                          ],
+                      for (int i = 0; i < contents.length; i++)
+                        Container(
+                          child: ContentView(contents[i]["content"]),
+                          color: Layout.tabBarActiveBg,
                         ),
-                      ),
                     ],
                   ),
                 ),
