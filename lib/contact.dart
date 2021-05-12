@@ -1,10 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'utils.dart';
 import 'layout.dart';
 
 class SnsInfo {
@@ -17,7 +13,7 @@ class SnsInfo {
 
 // 自己紹介
 class Contact extends StatelessWidget {
-  List<SnsInfo> snsAccounts = [
+  final List<SnsInfo> snsAccounts = [
     SnsInfo(
       imagePath: 'assets/facebook.png',
       name: 'Facebook',
@@ -89,9 +85,6 @@ class Contact extends StatelessWidget {
                 Padding(padding: EdgeInsets.all(20)),
               ],
             ),
-          // Layout.historyTable(educationalBackground),
-          Padding(padding: EdgeInsets.all(20)),
-          // Layout.historyTable(workHistory),
           Padding(padding: EdgeInsets.all(30)),
         ],
       ),
