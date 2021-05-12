@@ -51,6 +51,12 @@ flutter:
   assets:
     - assets/wn_icon.png
     - assets/acannie.jpg
+    - assets/facebook.png
+    - assets/linkedin.png
+    - assets/github.png
+    - assets/twitter.png
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
