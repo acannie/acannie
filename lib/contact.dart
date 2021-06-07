@@ -53,12 +53,7 @@ class Contact extends StatelessWidget {
           Container(
             width: 30.0,
             height: 30.0,
-            decoration: new BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(imagePath),
-                fit: BoxFit.fill,
-              ),
-            ),
+            child: Image(image: AssetImage(imagePath)),
           ),
           Padding(padding: EdgeInsets.all(10)),
           Layout.sentenceText(snsName),
