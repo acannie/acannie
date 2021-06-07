@@ -51,7 +51,6 @@ class Contact extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: 30.0,
             height: 30.0,
             child: Image(image: AssetImage(imagePath)),
           ),
