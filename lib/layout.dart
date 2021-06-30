@@ -46,7 +46,7 @@ class Layout {
 
   static Widget historyTable(List<History> histories) {
     return Container(
-      width: 500,
+      // width: 500,
       child: Table(
         columnWidths: const <int, TableColumnWidth>{
           0: IntrinsicColumnWidth(),
@@ -56,21 +56,21 @@ class Layout {
           for (History history in histories)
             TableRow(
               children: [
-                Flexible(
-                  flex: 1,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      history.when,
-                      style: TextStyle(
-                        color: contentChar,
-                        fontSize: 20,
-                      ),
+                Container(
+                  alignment: Alignment.centerRight,
+                  // flex: 1,
+                  child: Text(
+                    history.when,
+                    style: TextStyle(
+                      color: contentChar,
+                      fontSize: 20,
                     ),
                   ),
                 ),
-                Flexible(
-                  flex: 5,
+                Container(child: Text("  ")),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  // flex: 5,
                   child: Text(
                     history.event,
                     style: TextStyle(
