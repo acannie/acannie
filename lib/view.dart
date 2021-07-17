@@ -65,27 +65,27 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: contents.length,
-      child: Builder(
-        builder: (BuildContext context) {
-          final TabController tabController = DefaultTabController.of(context)!;
-          tabController.addListener(() {
-            if (!tabController.indexIsChanging) {
-              // To get index of current tab use tabController.index
-            }
-          });
+    return Scaffold(
+      appBar: BarWidgetClass().appBarMain(),
+      body: DefaultTabController(
+        length: contents.length,
+        child: Builder(
+          builder: (BuildContext context) {
+            final TabController tabController =
+                DefaultTabController.of(context)!;
+            tabController.addListener(() {
+              if (!tabController.indexIsChanging) {
+                // To get index of current tab use tabController.index
+              }
+            });
 
-          AcannieController _controller = AcannieController();
-
-          return Scaffold(
-            appBar: BarWidgetClass().appBarMain(),
-            body: Row(
+            AcannieController _controller = AcannieController();
+            return Row(
               children: [
                 InkWell(
                     child: Icon(Icons.favorite),
                     onTap: () => {
-                          tabController.animateTo(_controller.index),
+                          tabController.animateTo(_controller.activePageIndex),
                         }),
                 BarWidgetClass().leftBar(),
                 Expanded(
@@ -163,11 +163,11 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-            bottomNavigationBar: BarWidgetClass().bottomBar(),
-          );
-        },
+            );
+          },
+        ),
       ),
+      bottomNavigationBar: BarWidgetClass().bottomBar(),
     );
   }
 }
