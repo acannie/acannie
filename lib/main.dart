@@ -8,12 +8,14 @@ void main() {
   runApp(MyApp());
 }
 
-// ルートの Widget
 class MyApp extends StatelessWidget {
+  
+  static const String _title = 'Acannie\'s HomePage';
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'JOHINKODICE',
+      title: _title,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
