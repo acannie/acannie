@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'view.dart';
+import 'controller.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(MyApp());
+}
 
-/// This is the main application widget.
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+  
   static const String _title = 'Acannie\'s HomePage';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
-      home: MyHomePage(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MultiProvider(
+        child: MyHomePage(),
+        providers: [
+          ChangeNotifierProvider(create: (context) => AcannieController()),
+        ],
+      ),
     );
   }
 }

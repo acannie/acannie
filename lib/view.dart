@@ -13,22 +13,7 @@ import 'bar.dart';
 
 // import 'package:flutter/material.dart';
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-// ページ全体のレイアウトを生成
-class _MyHomePageState extends State<MyHomePage>
-    with SingleTickerProviderStateMixin {
-  TabController? _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TabController(length: contents.length, vsync: this);
-  }
-
+class MyHomePage extends StatelessWidget {
   List<Map<String, dynamic>> contents = [
     {
       "icon": Icon(
@@ -79,83 +64,104 @@ class _MyHomePageState extends State<MyHomePage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BarWidgetClass().appBarMain(),
-      body: Row(
-        children: [
-          BarWidgetClass().leftBar(),
-          Expanded(
-            child: Column(
+    TabController? _controller;
+
+    return DefaultTabController(
+      length: contents.length,
+      child: Builder(
+        builder: (BuildContext context) {
+          final TabController tabController = DefaultTabController.of(context)!;
+          tabController.addListener(() {
+            if (!tabController.indexIsChanging) {
+              // To get index of current tab use tabController.index
+            }
+          });
+
+          return Scaffold(
+            appBar: BarWidgetClass().appBarMain(),
+            body: Row(
               children: [
-                Container(
-                  height: 40,
-                  child: Ink(
-                    color: Layout.tabBarBg,
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Ink(
-                        color: Layout.tabBarNonActiveBg,
-                        child: TabBar(
-                          labelPadding: EdgeInsets.zero,
-                          indicatorPadding: EdgeInsets.zero,
-                          indicatorSize: TabBarIndicatorSize.label,
-                          indicator:
-                              BoxDecoration(color: Layout.tabBarActiveBg),
-                          labelColor: Layout.tabBarActiveLabel,
-                          unselectedLabelColor: Layout.tabBarNonActiveLabel,
-                          controller: _controller,
-                          isScrollable: true,
-                          tabs: [
-                            for (int i = 0; i < contents.length; i++)
-                              Tab(
-                                icon: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      right: BorderSide(color: Layout.tabBarBg),
+                BarWidgetClass().leftBar(),
+                Expanded(
+                  child: Column(
+                    children: [
+                      // ページのタブ
+                      Container(
+                        height: 40,
+                        child: Ink(
+                          color: Layout.tabBarBg,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Ink(
+                              color: Layout.tabBarNonActiveBg,
+                              child: TabBar(
+                                labelPadding: EdgeInsets.zero,
+                                indicatorPadding: EdgeInsets.zero,
+                                indicatorSize: TabBarIndicatorSize.label,
+                                indicator:
+                                    BoxDecoration(color: Layout.tabBarActiveBg),
+                                labelColor: Layout.tabBarActiveLabel,
+                                unselectedLabelColor:
+                                    Layout.tabBarNonActiveLabel,
+                                controller: _controller,
+                                isScrollable: true,
+                                tabs: [
+                                  for (int i = 0; i < contents.length; i++)
+                                    Tab(
+                                      icon: Container(
+                                        decoration: BoxDecoration(
+                                          border: Border(
+                                            right: BorderSide(
+                                                color: Layout.tabBarBg),
+                                          ),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.all(7),
+                                            ),
+                                            contents[i]["icon"],
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 3),
+                                            ),
+                                            Text(
+                                              contents[i]["title"],
+                                            ),
+                                            Padding(
+                                                padding: EdgeInsets.all(25)),
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.all(7),
-                                      ),
-                                      contents[i]["icon"],
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.symmetric(horizontal: 3),
-                                      ),
-                                      Text(
-                                        contents[i]["title"],
-                                      ),
-                                      Padding(padding: EdgeInsets.all(25)),
-                                    ],
-                                  ),
-                                ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      // ページ本体
+                      Expanded(
+                        child: TabBarView(
+                          controller: _controller,
+                          children: <Widget>[
+                            for (int i = 0; i < contents.length; i++)
+                              Container(
+                                child: ContentView(contents[i]["content"]),
+                                color: Layout.tabBarActiveBg,
                               ),
                           ],
                         ),
                       ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: TabBarView(
-                    controller: _controller,
-                    children: <Widget>[
-                      for (int i = 0; i < contents.length; i++)
-                        Container(
-                          child: ContentView(contents[i]["content"]),
-                          color: Layout.tabBarActiveBg,
-                        ),
                     ],
                   ),
                 ),
               ],
             ),
-          ),
-        ],
+            bottomNavigationBar: BarWidgetClass().bottomBar(),
+          );
+        },
       ),
-      bottomNavigationBar: BarWidgetClass().bottomBar(),
     );
   }
 }
