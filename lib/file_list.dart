@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'layout.dart';
 import 'controller.dart';
+import 'layout.dart';
 
 class DropDownListCotroller with ChangeNotifier {
   // 定数
@@ -37,13 +38,16 @@ class FileList extends StatelessWidget {
 
     return Container(
       width: 200,
-      color: Colors.red,
+      color: Layout.fileListBg,
       child: Column(
         children: [
           Container(
             child: Row(
               children: [
-                Text("EXPLORER"),
+                Text(
+                  "EXPLORER",
+                  style: TextStyle(color: Layout.fileListLabel),
+                ),
                 InkWell(
                   child: Icon(Icons.more_horiz),
                   onTap: () => {},
@@ -54,10 +58,13 @@ class FileList extends StatelessWidget {
           InkWell(
             child: Row(children: [
               if (_dropDownListCotroller.flg)
-                Icon(Icons.keyboard_arrow_down)
+                Icon(Icons.keyboard_arrow_down, color: Layout.fileListLabel)
               else
-                Icon(Icons.navigate_next_rounded),
-              Text("ACANNIE"),
+                Icon(Icons.navigate_next_rounded, color: Layout.fileListLabel),
+              Text(
+                "ACANNIE",
+                style: TextStyle(color: Layout.fileListLabel),
+              ),
             ]),
             onTap: () => {_dropDownListCotroller.dropDown()},
           ),
@@ -71,12 +78,38 @@ class FileList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Expanded(
-                      child: TextButton(
-                        child: Text(_controller.contents[index]),
-                        onPressed: () => {
-                          _controller.setActivePage(index),
-                          tabController.animateTo(_controller.activePageIndex),
-                        },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: () {
+                            if (_controller.activePageIndex == index) {
+                              return Color.fromARGB(255, 9, 71, 113);
+                            }
+                          }(),
+                          border: () {
+                            if (_controller.activePageIndex == index) {
+                              return Border.all(
+                                color: Color.fromARGB(255, 0, 127, 211),
+                              );
+                            }
+                          }(),
+                        ),
+                        child: TextButton(
+                          child: Text(
+                            _controller.contents[index],
+                            style: TextStyle(color: () {
+                              if (_controller.activePageIndex == index) {
+                                return Layout.fileListActiveLabel;
+                              } else {
+                                return Layout.fileListLabel;
+                              }
+                            }()),
+                          ),
+                          onPressed: () => {
+                            _controller.setActivePage(index),
+                            tabController
+                                .animateTo(_controller.activePageIndex),
+                          },
+                        ),
                       ),
                     ),
                   ],
