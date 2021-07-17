@@ -20,8 +20,8 @@ class AcannieController with ChangeNotifier {
   ];
 
   // 関数
-  void test() {
-    _activePageIndex = 3;
+  void setActivePage(int pageIndex) {
+    _activePageIndex = pageIndex;
     notifyListeners();
   }
 

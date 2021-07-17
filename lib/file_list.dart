@@ -44,6 +44,7 @@ class FileList extends StatelessWidget {
                     child: TextButton(
                       child: Text(_controller.contents[index]),
                       onPressed: () => {
+                        _controller.setActivePage(index),
                         tabController.animateTo(_controller.activePageIndex),
                       },
                     ),
