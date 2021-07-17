@@ -103,16 +103,17 @@ class MyHomePage extends StatelessWidget {
         length: contents.length,
         child: Builder(
           builder: (BuildContext context) {
+            final AcannieController _controller =
+                Provider.of<AcannieController>(context);
+
             final TabController tabController =
                 DefaultTabController.of(context)!;
             tabController.addListener(() {
               if (!tabController.indexIsChanging) {
-                // To get index of current tab use tabController.index
+                _controller.setActivePage(tabController.index);
               }
             });
 
-            final AcannieController _controller =
-                Provider.of<AcannieController>(context);
             return Row(
               children: [
                 LeftBar(),
