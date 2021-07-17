@@ -8,7 +8,16 @@ class AcannieController with ChangeNotifier {
   int _activePageIndex = 0;
 
   bool get pageListSelected => _pageListSelected;
-  bool _pageListSelected = true;
+  bool _pageListSelected = false;
+
+  List<String> get contents => _contents;
+  List<String> _contents = [
+    "Introduce",
+    "Contact",
+    "Works",
+    "Engineering",
+    "Favorite",
+  ];
 
   // 関数
   void test() {

@@ -13,6 +13,7 @@ import 'engineering.dart';
 import 'favorite.dart';
 import 'bottom_bar.dart';
 import 'left_bar.dart';
+import 'file_list.dart';
 
 // import 'package:flutter/material.dart';
 
@@ -114,18 +115,12 @@ class MyHomePage extends StatelessWidget {
                 Provider.of<AcannieController>(context);
             return Row(
               children: [
-                InkWell(
-                    child: Icon(Icons.favorite),
-                    onTap: () => {
-                          tabController.animateTo(_controller.activePageIndex),
-                          _controller.selectFileList(),
-                        }),
-                // BarWidgetClass().leftBar(),
                 LeftBar(),
                 // ページ一覧
                 Visibility(
-                    child: Text(_controller.pageListSelected.toString()),
-                    visible: _controller.pageListSelected),
+                  child: FileList(tabController: tabController),
+                  visible: _controller.pageListSelected,
+                ),
 
                 Expanded(
                   child: Column(
