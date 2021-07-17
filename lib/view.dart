@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:acannie/controller.dart';
 import 'package:flutter/material.dart';
 
 import 'layout.dart';
@@ -64,8 +65,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TabController? _controller;
-
     return DefaultTabController(
       length: contents.length,
       child: Builder(
@@ -77,10 +76,17 @@ class MyHomePage extends StatelessWidget {
             }
           });
 
+          AcannieController _controller = AcannieController();
+
           return Scaffold(
             appBar: BarWidgetClass().appBarMain(),
             body: Row(
               children: [
+                InkWell(
+                    child: Icon(Icons.favorite),
+                    onTap: () => {
+                          tabController.animateTo(_controller.index),
+                        }),
                 BarWidgetClass().leftBar(),
                 Expanded(
                   child: Column(
@@ -103,7 +109,7 @@ class MyHomePage extends StatelessWidget {
                                 labelColor: Layout.tabBarActiveLabel,
                                 unselectedLabelColor:
                                     Layout.tabBarNonActiveLabel,
-                                controller: _controller,
+                                controller: tabController,
                                 isScrollable: true,
                                 tabs: [
                                   for (int i = 0; i < contents.length; i++)
@@ -143,7 +149,7 @@ class MyHomePage extends StatelessWidget {
                       // ページ本体
                       Expanded(
                         child: TabBarView(
-                          controller: _controller,
+                          controller: tabController,
                           children: <Widget>[
                             for (int i = 0; i < contents.length; i++)
                               Container(
