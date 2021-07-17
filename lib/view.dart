@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:acannie/controller.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'layout.dart';
 import 'content_view.dart';
@@ -10,7 +11,6 @@ import 'contact.dart';
 import 'works.dart';
 import 'engineering.dart';
 import 'favorite.dart';
-import 'header_bar.dart';
 import 'bottom_bar.dart';
 import 'left_bar.dart';
 
