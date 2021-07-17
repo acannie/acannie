@@ -41,20 +41,24 @@ class FileList extends StatelessWidget {
       color: Layout.fileListBg,
       child: Column(
         children: [
+          // EXPLORER
           Container(
+            padding: EdgeInsets.all(10),
             child: Row(
               children: [
                 Text(
                   "EXPLORER",
-                  style: TextStyle(color: Layout.fileListLabel),
+                  style: TextStyle(color: Layout.fileListLabel, fontSize: 10),
                 ),
                 InkWell(
-                  child: Icon(Icons.more_horiz),
+                  child: Icon(Icons.more_horiz,
+                      color: Layout.fileListLabel, size: 20),
                   onTap: () => {},
                 ),
               ],
             ),
           ),
+          // 項目名
           InkWell(
             child: Row(children: [
               if (_dropDownListCotroller.flg)
@@ -68,6 +72,7 @@ class FileList extends StatelessWidget {
             ]),
             onTap: () => {_dropDownListCotroller.dropDown()},
           ),
+          // ファイル一覧
           Visibility(
             visible: _dropDownListCotroller.flg,
             child: ListView.builder(
