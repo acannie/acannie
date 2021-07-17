@@ -10,11 +10,42 @@ import 'contact.dart';
 import 'works.dart';
 import 'engineering.dart';
 import 'favorite.dart';
-import 'bar.dart';
+import 'header_bar.dart';
+import 'bottom_bar.dart';
+import 'left_bar.dart';
 
 // import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget {
+  PreferredSize headerBar() {
+    return PreferredSize(
+      preferredSize: Size.fromHeight(30.0),
+      child: AppBar(
+        title: Row(
+          children: [
+            Flexible(
+              child: Container(
+                child: Image.asset("assets/wn_icon.png"),
+                width: 30,
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(left: 20)),
+            Text(
+              'Acannie\'s HomePage',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Layout.appBarLabel,
+                fontSize: 20,
+              ),
+            )
+          ],
+        ),
+        backgroundColor: Layout.appBarBg,
+        elevation: 0,
+      ),
+    );
+  }
+
   List<Map<String, dynamic>> contents = [
     {
       "icon": Icon(
@@ -66,7 +97,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BarWidgetClass().appBarMain(),
+      appBar: headerBar(),
       body: DefaultTabController(
         length: contents.length,
         child: Builder(
@@ -79,15 +110,23 @@ class MyHomePage extends StatelessWidget {
               }
             });
 
-            AcannieController _controller = AcannieController();
+            final AcannieController _controller =
+                Provider.of<AcannieController>(context);
             return Row(
               children: [
                 InkWell(
                     child: Icon(Icons.favorite),
                     onTap: () => {
                           tabController.animateTo(_controller.activePageIndex),
+                          _controller.selectFileList(),
                         }),
-                BarWidgetClass().leftBar(),
+                // BarWidgetClass().leftBar(),
+                LeftBar(),
+                // ページ一覧
+                Visibility(
+                    child: Text(_controller.pageListSelected.toString()),
+                    visible: _controller.pageListSelected),
+
                 Expanded(
                   child: Column(
                     children: [
@@ -167,7 +206,7 @@ class MyHomePage extends StatelessWidget {
           },
         ),
       ),
-      bottomNavigationBar: BarWidgetClass().bottomBar(),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }
