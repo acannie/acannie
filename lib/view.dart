@@ -6,11 +6,6 @@ import 'package:provider/provider.dart';
 
 import 'layout.dart';
 import 'content_view.dart';
-import 'introduce.dart';
-import 'contact.dart';
-import 'works.dart';
-import 'engineering.dart';
-import 'favorite.dart';
 import 'bottom_bar.dart';
 import 'left_bar.dart';
 import 'file_list.dart';
@@ -47,60 +42,15 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
-  List<Map<String, dynamic>> contents = [
-    {
-      "icon": Icon(
-        Icons.sentiment_satisfied_outlined,
-        color: Color.fromARGB(255, 81, 154, 186),
-        size: 15,
-      ),
-      "title": "Introduce",
-      "content": Introduce(),
-    },
-    {
-      "icon": Icon(
-        Icons.contact_mail,
-        color: Color.fromARGB(255, 160, 116, 196),
-        size: 15,
-      ),
-      "title": "Contact",
-      "content": Contact(),
-    },
-    {
-      "icon": Icon(
-        Icons.palette,
-        color: Color.fromARGB(255, 227, 121, 51),
-        size: 15,
-      ),
-      "title": "Works",
-      "content": Works(),
-    },
-    {
-      "icon": Icon(
-        Icons.computer,
-        color: Color.fromARGB(255, 81, 154, 186),
-        size: 15,
-      ),
-      "title": "Engineering",
-      "content": Engineering(),
-    },
-    {
-      "icon": Icon(
-        Icons.favorite,
-        color: Color.fromARGB(255, 204, 62, 68),
-        size: 15,
-      ),
-      "title": "Favorite",
-      "content": Favorite(),
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final AcannieController _controller =
+        Provider.of<AcannieController>(context);
+
     return Scaffold(
       appBar: headerBar(),
       body: DefaultTabController(
-        length: contents.length,
+        length: _controller.pageContents.length,
         child: Builder(
           builder: (BuildContext context) {
             final AcannieController _controller =
@@ -147,7 +97,8 @@ class MyHomePage extends StatelessWidget {
                                 controller: tabController,
                                 isScrollable: true,
                                 tabs: [
-                                  for (int i = 0; i < contents.length; i++)
+                                  for (PageContent pageContent
+                                      in _controller.pageContents)
                                     Tab(
                                       icon: Container(
                                         decoration: BoxDecoration(
@@ -161,16 +112,21 @@ class MyHomePage extends StatelessWidget {
                                             Padding(
                                               padding: EdgeInsets.all(7),
                                             ),
-                                            contents[i]["icon"],
+                                            Icon(
+                                              pageContent.iconData,
+                                              color: pageContent.iconColor,
+                                              size: 15,
+                                            ),
                                             Padding(
                                               padding: EdgeInsets.symmetric(
                                                   horizontal: 3),
                                             ),
                                             Text(
-                                              contents[i]["title"],
+                                              pageContent.title,
                                             ),
                                             Padding(
-                                                padding: EdgeInsets.all(25)),
+                                              padding: EdgeInsets.all(25),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -186,9 +142,10 @@ class MyHomePage extends StatelessWidget {
                         child: TabBarView(
                           controller: tabController,
                           children: <Widget>[
-                            for (int i = 0; i < contents.length; i++)
+                            for (PageContent pageContent
+                                in _controller.pageContents)
                               Container(
-                                child: ContentView(contents[i]["content"]),
+                                child: ContentView(pageContent: pageContent),
                                 color: Layout.tabBarActiveBg,
                               ),
                           ],

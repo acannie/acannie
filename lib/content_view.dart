@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:acannie/controller.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 
@@ -8,8 +9,8 @@ import 'layout.dart';
 
 // 自己紹介
 class ContentView extends StatelessWidget {
-  final Widget? content;
-  ContentView(this.content);
+  final PageContent pageContent;
+  ContentView({required this.pageContent});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class ContentView extends StatelessWidget {
             // 行番号
             Column(
               children: [
-                for (var i = 0; i < 48; i++)
+                for (var i = 0; i < pageContent.lineLength; i++)
                   Container(
                     width: 40,
                     padding: EdgeInsets.only(top: 2, left: 20, bottom: 2),
@@ -43,7 +44,7 @@ class ContentView extends StatelessWidget {
             ),
             Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
             // 内容本体
-            Expanded(child: this.content!),
+            Expanded(child: this.pageContent.content),
           ],
         )
       ],

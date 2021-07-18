@@ -28,34 +28,6 @@ class FileList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Icon> icons = [
-      Icon(
-        Icons.sentiment_satisfied_outlined,
-        color: Color.fromARGB(255, 81, 154, 186),
-        size: 15,
-      ),
-      Icon(
-        Icons.contact_mail,
-        color: Color.fromARGB(255, 160, 116, 196),
-        size: 15,
-      ),
-      Icon(
-        Icons.palette,
-        color: Color.fromARGB(255, 227, 121, 51),
-        size: 15,
-      ),
-      Icon(
-        Icons.computer,
-        color: Color.fromARGB(255, 81, 154, 186),
-        size: 15,
-      ),
-      Icon(
-        Icons.favorite,
-        color: Color.fromARGB(255, 204, 62, 68),
-        size: 15,
-      ),
-    ];
-
     final AcannieController _controller =
         Provider.of<AcannieController>(context);
     final DropDownListCotroller _dropDownListCotroller =
@@ -108,7 +80,7 @@ class FileList extends StatelessWidget {
             visible: _dropDownListCotroller.flg,
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: _controller.contents.length,
+              itemCount: _controller.pageContents.length,
               itemBuilder: (BuildContext context, int index) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -135,12 +107,17 @@ class FileList extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsets.all(7),
                               ),
-                              icons[index],
+                              Icon(
+                                _controller.pageContents[index].iconData,
+                                color:
+                                    _controller.pageContents[index].iconColor,
+                                size: 15,
+                              ),
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 3),
                               ),
                               Text(
-                                _controller.contents[index],
+                                _controller.pageContents[index].title,
                                 style: TextStyle(color: () {
                                   if (_controller.activePageIndex == index) {
                                     return Layout.fileListActiveLabel;
