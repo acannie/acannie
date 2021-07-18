@@ -10,7 +10,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  static const String _title = 'Acannie\'s HomePage';
+  static const String _title = 'Acannie のホームぺージ';
 
   @override
   Widget build(BuildContext context) {
