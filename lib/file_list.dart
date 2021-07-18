@@ -23,14 +23,41 @@ class DropDownListCotroller with ChangeNotifier {
 class FileList extends StatelessWidget {
   final TabController tabController;
 
-//受け取る値を上記の変数に代入
+  // 受け取る値を上記の変数に代入
   FileList({required this.tabController});
 
   @override
   Widget build(BuildContext context) {
+    List<Icon> icons = [
+      Icon(
+        Icons.sentiment_satisfied_outlined,
+        color: Color.fromARGB(255, 81, 154, 186),
+        size: 15,
+      ),
+      Icon(
+        Icons.contact_mail,
+        color: Color.fromARGB(255, 160, 116, 196),
+        size: 15,
+      ),
+      Icon(
+        Icons.palette,
+        color: Color.fromARGB(255, 227, 121, 51),
+        size: 15,
+      ),
+      Icon(
+        Icons.computer,
+        color: Color.fromARGB(255, 81, 154, 186),
+        size: 15,
+      ),
+      Icon(
+        Icons.favorite,
+        color: Color.fromARGB(255, 204, 62, 68),
+        size: 15,
+      ),
+    ];
+
     final AcannieController _controller =
         Provider.of<AcannieController>(context);
-
     final DropDownListCotroller _dropDownListCotroller =
         Provider.of<DropDownListCotroller>(context);
 
@@ -60,16 +87,20 @@ class FileList extends StatelessWidget {
           ),
           // 項目名
           InkWell(
-            child: Row(children: [
-              if (_dropDownListCotroller.flg)
-                Icon(Icons.keyboard_arrow_down, color: Layout.fileListLabel)
-              else
-                Icon(Icons.navigate_next_rounded, color: Layout.fileListLabel),
-              Text(
-                "ACANNIE",
-                style: TextStyle(color: Layout.fileListLabel),
-              ),
-            ]),
+            child: Row(
+              children: [
+                if (_dropDownListCotroller.flg)
+                  Icon(Icons.keyboard_arrow_down, color: Layout.fileListLabel)
+                else
+                  Icon(Icons.navigate_next_rounded,
+                      color: Layout.fileListLabel),
+                Text(
+                  "ACANNIE",
+                  style: TextStyle(
+                      color: Layout.fileListLabel, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
             onTap: () => {_dropDownListCotroller.dropDown()},
           ),
           // ファイル一覧
@@ -99,15 +130,26 @@ class FileList extends StatelessWidget {
                           }(),
                         ),
                         child: TextButton(
-                          child: Text(
-                            _controller.contents[index],
-                            style: TextStyle(color: () {
-                              if (_controller.activePageIndex == index) {
-                                return Layout.fileListActiveLabel;
-                              } else {
-                                return Layout.fileListLabel;
-                              }
-                            }()),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(7),
+                              ),
+                              icons[index],
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 3),
+                              ),
+                              Text(
+                                _controller.contents[index],
+                                style: TextStyle(color: () {
+                                  if (_controller.activePageIndex == index) {
+                                    return Layout.fileListActiveLabel;
+                                  } else {
+                                    return Layout.fileListLabel;
+                                  }
+                                }()),
+                              ),
+                            ],
                           ),
                           onPressed: () => {
                             _controller.setActivePage(index),
