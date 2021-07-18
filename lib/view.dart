@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:acannie/controller.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'layout.dart';
 import 'content_view.dart';
@@ -9,11 +11,42 @@ import 'contact.dart';
 import 'works.dart';
 import 'engineering.dart';
 import 'favorite.dart';
-import 'bar.dart';
+import 'bottom_bar.dart';
+import 'left_bar.dart';
+import 'file_list.dart';
 
 // import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget {
+  PreferredSize headerBar() {
+    return PreferredSize(
+      preferredSize: Size.fromHeight(30.0),
+      child: AppBar(
+        title: Row(
+          children: [
+            Flexible(
+              child: Container(
+                child: Image.asset("assets/wn_icon.png"),
+                width: 30,
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(left: 20)),
+            Text(
+              'Acannie\'s HomePage',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Layout.appBarLabel,
+                fontSize: 20,
+              ),
+            )
+          ],
+        ),
+        backgroundColor: Layout.appBarBg,
+        elevation: 0,
+      ),
+    );
+  }
+
   List<Map<String, dynamic>> contents = [
     {
       "icon": Icon(
@@ -64,24 +97,32 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TabController? _controller;
+    return Scaffold(
+      appBar: headerBar(),
+      body: DefaultTabController(
+        length: contents.length,
+        child: Builder(
+          builder: (BuildContext context) {
+            final AcannieController _controller =
+                Provider.of<AcannieController>(context);
 
-    return DefaultTabController(
-      length: contents.length,
-      child: Builder(
-        builder: (BuildContext context) {
-          final TabController tabController = DefaultTabController.of(context)!;
-          tabController.addListener(() {
-            if (!tabController.indexIsChanging) {
-              // To get index of current tab use tabController.index
-            }
-          });
+            final TabController tabController =
+                DefaultTabController.of(context)!;
+            tabController.addListener(() {
+              if (!tabController.indexIsChanging) {
+                _controller.setActivePage(tabController.index);
+              }
+            });
 
-          return Scaffold(
-            appBar: BarWidgetClass().appBarMain(),
-            body: Row(
+            return Row(
               children: [
-                BarWidgetClass().leftBar(),
+                LeftBar(),
+                // ページ一覧
+                Visibility(
+                  child: FileList(tabController: tabController),
+                  visible: _controller.pageListSelected,
+                ),
+
                 Expanded(
                   child: Column(
                     children: [
@@ -103,7 +144,7 @@ class MyHomePage extends StatelessWidget {
                                 labelColor: Layout.tabBarActiveLabel,
                                 unselectedLabelColor:
                                     Layout.tabBarNonActiveLabel,
-                                controller: _controller,
+                                controller: tabController,
                                 isScrollable: true,
                                 tabs: [
                                   for (int i = 0; i < contents.length; i++)
@@ -143,7 +184,7 @@ class MyHomePage extends StatelessWidget {
                       // ページ本体
                       Expanded(
                         child: TabBarView(
-                          controller: _controller,
+                          controller: tabController,
                           children: <Widget>[
                             for (int i = 0; i < contents.length; i++)
                               Container(
@@ -157,11 +198,11 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-            bottomNavigationBar: BarWidgetClass().bottomBar(),
-          );
-        },
+            );
+          },
+        ),
       ),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }
