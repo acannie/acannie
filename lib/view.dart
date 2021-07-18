@@ -125,7 +125,8 @@ class MyHomePage extends StatelessWidget {
                                               pageContent.title,
                                             ),
                                             Padding(
-                                                padding: EdgeInsets.all(25)),
+                                              padding: EdgeInsets.all(25),
+                                            ),
                                           ],
                                         ),
                                       ),

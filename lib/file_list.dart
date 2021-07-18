@@ -80,7 +80,7 @@ class FileList extends StatelessWidget {
             visible: _dropDownListCotroller.flg,
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: _controller.contents.length,
+              itemCount: _controller.pageContents.length,
               itemBuilder: (BuildContext context, int index) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -117,7 +117,7 @@ class FileList extends StatelessWidget {
                                 padding: EdgeInsets.symmetric(horizontal: 3),
                               ),
                               Text(
-                                _controller.contents[index],
+                                _controller.pageContents[index].title,
                                 style: TextStyle(color: () {
                                   if (_controller.activePageIndex == index) {
                                     return Layout.fileListActiveLabel;

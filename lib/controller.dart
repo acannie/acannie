@@ -25,6 +25,11 @@ class PageContent {
 }
 
 class AcannieController with ChangeNotifier {
+  // コンストラクタ
+  AcannieController() {
+    _selectedPageContents = pageContents;
+  }
+
   // 定数
   List<PageContent> pageContents = [
     PageContent(
@@ -71,14 +76,8 @@ class AcannieController with ChangeNotifier {
   bool get pageListSelected => _pageListSelected;
   bool _pageListSelected = false;
 
-  List<String> get contents => _contents;
-  List<String> _contents = [
-    "Introduce",
-    "Contact",
-    "Works",
-    "Engineering",
-    "Favorite",
-  ];
+  List<PageContent>? get selectedPageContents => _selectedPageContents;
+  List<PageContent>? _selectedPageContents;
 
   // 関数
   void setActivePage(int pageIndex) {
