@@ -144,7 +144,7 @@ class MyHomePage extends StatelessWidget {
                             for (PageContent pageContent
                                 in _controller.pageContents)
                               Container(
-                                child: ContentView(pageContent.content),
+                                child: ContentView(pageContent: pageContent),
                                 color: Layout.tabBarActiveBg,
                               ),
                           ],

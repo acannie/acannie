@@ -13,12 +13,14 @@ class PageContent {
   Color iconColor;
   String title;
   Widget content;
+  int lineLength;
 
   PageContent({
     required this.iconData,
     required this.iconColor,
     required this.title,
     required this.content,
+    required this.lineLength,
   });
 }
 
@@ -30,30 +32,35 @@ class AcannieController with ChangeNotifier {
       iconColor: Color.fromARGB(255, 81, 154, 186),
       title: "Introduce",
       content: Introduce(),
+      lineLength: 43,
     ),
     PageContent(
       iconData: Icons.contact_mail,
       iconColor: Color.fromARGB(255, 160, 116, 196),
       title: "Contact",
       content: Contact(),
+      lineLength: 21,
     ),
     PageContent(
       iconData: Icons.palette,
       iconColor: Color.fromARGB(255, 227, 121, 51),
       title: "Works",
       content: Works(),
+      lineLength: 29,
     ),
     PageContent(
       iconData: Icons.computer,
       iconColor: Color.fromARGB(255, 81, 154, 186),
       title: "Engineering",
       content: Engineering(),
+      lineLength: 34,
     ),
     PageContent(
       iconData: Icons.favorite,
       iconColor: Color.fromARGB(255, 204, 62, 68),
       title: "Favorite",
       content: Favorite(),
+      lineLength: 11,
     ),
   ];
 
