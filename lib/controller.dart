@@ -74,7 +74,7 @@ class AcannieController with ChangeNotifier {
   int _activePageIndex = 0;
 
   bool get pageListSelected => _pageListSelected;
-  bool _pageListSelected = false;
+  bool _pageListSelected = true;
 
   List<PageContent>? get selectedPageContents => _selectedPageContents;
   List<PageContent>? _selectedPageContents;
