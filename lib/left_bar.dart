@@ -29,27 +29,35 @@ class LeftBar extends StatelessWidget {
       width: 50,
       child: Column(
         children: [
-          Padding(padding: EdgeInsets.all(10)),
           for (var i = 0; i < icons.length; i++)
             Column(
               children: [
                 Row(
                   children: [
                     Container(
-                      color: Colors.white,
+                      color: () {
+                        if (_controller.pageListSelected) {
+                          return Layout.fileListActiveLabel;
+                        }
+                        return Layout.leftBarBg;
+                      }(),
                       width: 2,
-                      height: 60,
+                      height: 45,
                     ),
                     Expanded(
                       child: Container(
                         width: 30,
-                        color: Colors.yellow,
                         child: InkWell(
                           hoverColor: Colors.white,
                           child: Icon(
                             icons[i],
-                            color: Color.fromARGB(255, 133, 133, 133),
-                            size: 30,
+                            color: () {
+                              if (_controller.pageListSelected) {
+                                return Layout.fileListActiveLabel;
+                              }
+                              return Layout.fileListNonActiveLabel;
+                            }(),
+                            size: 25,
                           ),
                           onTap: () {
                             _controller.selectFileList();
