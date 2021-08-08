@@ -9,6 +9,8 @@ import 'content_view.dart';
 import 'bottom_bar.dart';
 import 'left_bar.dart';
 import 'file_list.dart';
+import 'search.dart';
+import 'bug_report.dart';
 
 // import 'package:flutter/material.dart';
 
@@ -83,11 +85,11 @@ class MyHomePage extends StatelessWidget {
               ),
               LeftBarListContent(
                 iconData: Icons.search,
-                content: Text("Coming Soon!"),
+                content: Search(),
               ),
               LeftBarListContent(
                 iconData: Icons.bug_report,
-                content: Text("Coming Soon!"),
+                content: BugReport(),
               ),
             ];
 
