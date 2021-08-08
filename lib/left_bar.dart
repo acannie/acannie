@@ -33,18 +33,32 @@ class LeftBar extends StatelessWidget {
           for (var i = 0; i < icons.length; i++)
             Column(
               children: [
-                InkWell(
-                  hoverColor: Colors.white,
-                  child: Icon(
-                    icons[i],
-                    color: Color.fromARGB(255, 133, 133, 133),
-                    size: 30,
-                  ),
-                  onTap: () {
-                    _controller.selectFileList();
-                  },
+                Row(
+                  children: [
+                    Container(
+                      color: Colors.white,
+                      width: 2,
+                      height: 60,
+                    ),
+                    Expanded(
+                      child: Container(
+                        width: 30,
+                        color: Colors.yellow,
+                        child: InkWell(
+                          hoverColor: Colors.white,
+                          child: Icon(
+                            icons[i],
+                            color: Color.fromARGB(255, 133, 133, 133),
+                            size: 30,
+                          ),
+                          onTap: () {
+                            _controller.selectFileList();
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                Padding(padding: EdgeInsets.all(15)),
               ],
             ),
         ],
