@@ -73,8 +73,11 @@ class AcannieController with ChangeNotifier {
   int get activePageIndex => _activePageIndex;
   int _activePageIndex = 0;
 
-  bool get pageListSelected => _pageListSelected;
-  bool _pageListSelected = false;
+  bool get leftListActive => _leftListActive; // 左側のリストが表示モードになっているか
+  bool _leftListActive = true;
+  int get activeLeftBarIconIndex =>
+      _activeLeftBarIconIndex; // 左側のバーの中でアクティブになっているアイコンのindex
+  int _activeLeftBarIconIndex = 0;
 
   List<PageContent>? get selectedPageContents => _selectedPageContents;
   List<PageContent>? _selectedPageContents;
@@ -85,8 +88,15 @@ class AcannieController with ChangeNotifier {
     notifyListeners();
   }
 
-  void selectFileList() {
-    _pageListSelected = !_pageListSelected;
+  void tapLeftBarIcon(int index) {
+    // 選択されているアイコンをクリックした場合
+    if (_leftListActive == true && index == _activeLeftBarIconIndex) {
+      _leftListActive = false;
+      notifyListeners();
+      return;
+    }
+    _leftListActive = true;
+    _activeLeftBarIconIndex = index;
     notifyListeners();
   }
 }

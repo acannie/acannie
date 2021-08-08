@@ -29,22 +29,47 @@ class LeftBar extends StatelessWidget {
       width: 50,
       child: Column(
         children: [
-          Padding(padding: EdgeInsets.all(10)),
           for (var i = 0; i < icons.length; i++)
             Column(
               children: [
-                InkWell(
-                  hoverColor: Colors.white,
-                  child: Icon(
-                    icons[i],
-                    color: Color.fromARGB(255, 133, 133, 133),
-                    size: 30,
-                  ),
-                  onTap: () {
-                    _controller.selectFileList();
-                  },
+                Row(
+                  children: [
+                    // indecator
+                    Container(
+                      color: () {
+                        if (_controller.activeLeftBarIconIndex == i) {
+                          return Layout.fileListActiveLabel;
+                        }
+                        return Layout.leftBarBg;
+                      }(),
+                      width: 2,
+                      height: 50,
+                    ),
+                    // Icon
+                    Expanded(
+                      child: Container(
+                        width: 30,
+                        height: 50,
+                        child: InkWell(
+                          hoverColor: Colors.white,
+                          child: Icon(
+                            icons[i],
+                            color: () {
+                              if (_controller.activeLeftBarIconIndex == i) {
+                                return Layout.fileListActiveLabel;
+                              }
+                              return Layout.fileListNonActiveLabel;
+                            }(),
+                            size: 25,
+                          ),
+                          onTap: () {
+                            _controller.tapLeftBarIcon(i);
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                Padding(padding: EdgeInsets.all(15)),
               ],
             ),
         ],

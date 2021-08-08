@@ -27,6 +27,8 @@ class Layout {
   static const Color fileListLabel = Color.fromARGB(255, 204, 204, 204);
   static const Color fileListBg = Color.fromARGB(255, 37, 37, 38);
   static const Color fileListActiveLabel = Color.fromARGB(255, 255, 255, 255);
+  static const Color fileListNonActiveLabel =
+      Color.fromARGB(255, 133, 133, 133);
 
   static Text titleText(String title) {
     return Text(
