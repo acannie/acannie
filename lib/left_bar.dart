@@ -49,6 +49,7 @@ class LeftBar extends StatelessWidget {
                     Expanded(
                       child: Container(
                         width: 30,
+                        height: 50,
                         child: InkWell(
                           hoverColor: Colors.white,
                           child: Icon(
