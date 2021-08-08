@@ -70,7 +70,7 @@ class MyHomePage extends StatelessWidget {
                 // ページ一覧
                 Visibility(
                   child: FileList(tabController: tabController),
-                  visible: _controller.pageListSelected,
+                  visible: _controller.leftListActive,
                 ),
 
                 Expanded(

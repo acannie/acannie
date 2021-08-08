@@ -34,16 +34,18 @@ class LeftBar extends StatelessWidget {
               children: [
                 Row(
                   children: [
+                    // indecator
                     Container(
                       color: () {
-                        if (_controller.pageListSelected) {
+                        if (_controller.activeLeftBarIconIndex == i) {
                           return Layout.fileListActiveLabel;
                         }
                         return Layout.leftBarBg;
                       }(),
                       width: 2,
-                      height: 45,
+                      height: 50,
                     ),
+                    // Icon
                     Expanded(
                       child: Container(
                         width: 30,
@@ -52,7 +54,7 @@ class LeftBar extends StatelessWidget {
                           child: Icon(
                             icons[i],
                             color: () {
-                              if (_controller.pageListSelected) {
+                              if (_controller.activeLeftBarIconIndex == i) {
                                 return Layout.fileListActiveLabel;
                               }
                               return Layout.fileListNonActiveLabel;
@@ -60,7 +62,7 @@ class LeftBar extends StatelessWidget {
                             size: 25,
                           ),
                           onTap: () {
-                            _controller.selectFileList();
+                            _controller.tapLeftBarIcon(i);
                           },
                         ),
                       ),
