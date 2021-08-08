@@ -12,6 +12,17 @@ import 'file_list.dart';
 
 // import 'package:flutter/material.dart';
 
+// 左側のバーのアイコン関連の情報
+class LeftBarListContent {
+  IconData iconData;
+  Widget content;
+
+  LeftBarListContent({
+    required this.iconData,
+    required this.content,
+  });
+}
+
 class MyHomePage extends StatelessWidget {
   PreferredSize headerBar() {
     return PreferredSize(
@@ -64,14 +75,33 @@ class MyHomePage extends StatelessWidget {
               }
             });
 
+            // 左側のバーのアイコン関連の情報一覧
+            List<LeftBarListContent> leftBarListContents = [
+              LeftBarListContent(
+                iconData: Icons.file_copy_outlined,
+                content: FileList(tabController: tabController),
+              ),
+              LeftBarListContent(
+                iconData: Icons.search,
+                content: Text("Coming Soon!"),
+              ),
+              LeftBarListContent(
+                iconData: Icons.bug_report,
+                content: Text("Coming Soon!"),
+              ),
+            ];
+
             return Row(
               children: [
                 LeftBar(),
-                // ページ一覧
-                Visibility(
-                  child: FileList(tabController: tabController),
-                  visible: _controller.leftListActive,
-                ),
+
+                // 左側のバーのアイコンをタップしたときに表示される領域
+                for (int i = 0; i < leftBarListContents.length; i++)
+                  Visibility(
+                    child: leftBarListContents[i].content,
+                    visible: _controller.leftListActive &&
+                        _controller.activeLeftBarIconIndex == i,
+                  ),
 
                 Expanded(
                   child: Column(
