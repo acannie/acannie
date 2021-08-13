@@ -22,6 +22,7 @@ class Terminal extends StatelessWidget {
           });
 
           return Expanded(
+            flex: 1,
             child: Row(
               children: [
                 Expanded(

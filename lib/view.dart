@@ -171,6 +171,7 @@ class MyHomePage extends StatelessWidget {
                             ),
                             // ページ本体
                             Expanded(
+                              flex: 2,
                               child: TabBarView(
                                 controller: tabController,
                                 children: <Widget>[
