@@ -82,6 +82,9 @@ class AcannieController with ChangeNotifier {
   List<PageContent>? get selectedPageContents => _selectedPageContents;
   List<PageContent>? _selectedPageContents;
 
+  bool get terminalActive => _terminalActive; // Terminal が表示モードか
+  bool _terminalActive = true;
+
   // 関数
   void setActivePage(int pageIndex) {
     _activePageIndex = pageIndex;
@@ -97,6 +100,11 @@ class AcannieController with ChangeNotifier {
     }
     _leftListActive = true;
     _activeLeftBarIconIndex = index;
+    notifyListeners();
+  }
+
+  void switchTerminalActivity() {
+    _terminalActive = !_terminalActive;
     notifyListeners();
   }
 }

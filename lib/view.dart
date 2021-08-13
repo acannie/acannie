@@ -11,8 +11,7 @@ import 'left_bar.dart';
 import 'file_list.dart';
 import 'search.dart';
 import 'bug_report.dart';
-
-// import 'package:flutter/material.dart';
+import 'terminal.dart';
 
 // 左側のバーのアイコン関連の情報
 class LeftBarListContent {
@@ -185,6 +184,11 @@ class MyHomePage extends StatelessWidget {
                                 ],
                               ),
                             ),
+                            // Terminal部
+                            Visibility(
+                              child: Terminal(),
+                              visible: _controller.terminalActive,
+                            ),
                           ],
                         ),
                       ),
@@ -199,7 +203,7 @@ class MyHomePage extends StatelessWidget {
       bottomNavigationBar: BottomBar(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add your onPressed code here!
+          _controller.switchTerminalActivity();
         },
         child: const Icon(Icons.web_asset),
         backgroundColor: Color.fromARGB(255, 104, 33, 122),
