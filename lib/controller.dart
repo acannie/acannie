@@ -84,12 +84,19 @@ class AcannieController with ChangeNotifier {
     TerminalContent(
       title: "TERMINAL",
       content: Text(
-          "aaaaa\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\n",
+          "aaaaa\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\nbbbbbbb",
           style: TextStyle(color: Colors.white)),
     ),
-    TerminalContent(title: "DEBUG CONSOLE", content: Text("test")),
-    TerminalContent(title: "PROBLEMS", content: Text("test")),
-    TerminalContent(title: "OUTPUT", content: Text("test")),
+    TerminalContent(
+      title: "DEBUG CONSOLE",
+      content: Text("Coming Soon!", style: TextStyle(color: Colors.white)),
+    ),
+    TerminalContent(
+        title: "PROBLEMS",
+        content: Text("Coming Soon!", style: TextStyle(color: Colors.white))),
+    TerminalContent(
+        title: "OUTPUT",
+        content: Text("Coming Soon!", style: TextStyle(color: Colors.white))),
   ];
 
   // 変数

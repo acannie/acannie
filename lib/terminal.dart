@@ -94,7 +94,12 @@ class Terminal extends StatelessWidget {
                               Container(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 20, vertical: 10),
-                                child: terminalContent.content,
+                                child: ListView(
+                                  scrollDirection: Axis.vertical,
+                                  children: <Widget>[
+                                    terminalContent.content,
+                                  ],
+                                ),
                                 color: Layout.tabBarActiveBg,
                               ),
                           ],
