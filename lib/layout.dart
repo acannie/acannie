@@ -30,6 +30,12 @@ class Layout {
   static const Color fileListNonActiveLabel =
       Color.fromARGB(255, 133, 133, 133);
 
+  // Terminal 関連
+  static const Color terminalTabBarActiveLabel =
+      Color.fromARGB(255, 231, 231, 231);
+  static const Color terminalTabBarNonActiveLabel =
+      Color.fromARGB(255, 151, 151, 151);
+
   static Text titleText(String title) {
     return Text(
       title,

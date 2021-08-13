@@ -11,14 +11,12 @@ class Terminal extends StatelessWidget {
     final AcannieController _controller =
         Provider.of<AcannieController>(context);
     return DefaultTabController(
-      length: _controller.pageContents.length,
+      length: _controller.terminalContents.length,
       child: Builder(
         builder: (BuildContext context) {
           final TabController tabController = DefaultTabController.of(context)!;
           tabController.addListener(() {
-            if (!tabController.indexIsChanging) {
-              // _controller.setActivePage(tabController.index);
-            }
+            if (!tabController.indexIsChanging) {}
           });
 
           return Expanded(
@@ -32,59 +30,56 @@ class Terminal extends StatelessWidget {
                       Container(
                         height: 40,
                         child: Ink(
-                          color: Layout.tabBarBg,
+                          color: Layout.tabBarActiveBg,
                           child: Align(
                             alignment: Alignment.centerLeft,
-                            child: Ink(
-                              color: Layout.tabBarNonActiveBg,
-                              child: TabBar(
-                                labelPadding: EdgeInsets.zero,
-                                indicatorPadding: EdgeInsets.zero,
-                                indicatorSize: TabBarIndicatorSize.label,
-                                indicator:
-                                    BoxDecoration(color: Layout.tabBarActiveBg),
-                                labelColor: Layout.tabBarActiveLabel,
-                                unselectedLabelColor:
-                                    Layout.tabBarNonActiveLabel,
-                                controller: tabController,
-                                isScrollable: true,
-                                tabs: [
-                                  for (PageContent pageContent
-                                      in _controller.pageContents)
-                                    Tab(
-                                      icon: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border(
-                                            right: BorderSide(
-                                                color: Layout.tabBarBg),
-                                          ),
-                                        ),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.all(5),
+                                ),
+                                TabBar(
+                                  labelPadding: EdgeInsets.all(2.0),
+                                  indicatorPadding:
+                                      EdgeInsets.symmetric(horizontal: 10),
+                                  labelColor: Layout.terminalTabBarActiveLabel,
+                                  indicatorWeight: 1.0,
+                                  unselectedLabelColor:
+                                      Layout.terminalTabBarNonActiveLabel,
+                                  indicatorColor:
+                                      Layout.terminalTabBarActiveLabel,
+                                  controller: tabController,
+                                  isScrollable: true,
+                                  tabs: [
+                                    for (TerminalContent terminalContent
+                                        in _controller.terminalContents)
+                                      Tab(
                                         child: Row(
                                           children: [
                                             Padding(
-                                              padding: EdgeInsets.all(7),
-                                            ),
-                                            Icon(
-                                              pageContent.iconData,
-                                              color: pageContent.iconColor,
-                                              size: 15,
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 3),
+                                              padding: EdgeInsets.all(5),
                                             ),
                                             Text(
-                                              pageContent.title,
+                                              terminalContent.title,
+                                              style: TextStyle(fontSize: 11),
                                             ),
                                             Padding(
-                                              padding: EdgeInsets.all(25),
+                                              padding: EdgeInsets.all(5),
                                             ),
                                           ],
                                         ),
                                       ),
-                                    ),
-                                ],
-                              ),
+                                  ],
+                                ),
+                                Expanded(child: Container()),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: InkWell(
+                                    child: Icon(Icons.delete),
+                                    onTap: () {},
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -94,10 +89,12 @@ class Terminal extends StatelessWidget {
                         child: TabBarView(
                           controller: tabController,
                           children: <Widget>[
-                            for (PageContent pageContent
-                                in _controller.pageContents)
+                            for (TerminalContent terminalContent
+                                in _controller.terminalContents)
                               Container(
-                                child: Text("aaa"),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                child: terminalContent.content,
                                 color: Layout.tabBarActiveBg,
                               ),
                           ],

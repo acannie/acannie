@@ -24,6 +24,17 @@ class PageContent {
   });
 }
 
+// Terminal Content
+class TerminalContent {
+  String title;
+  Widget content;
+
+  TerminalContent({
+    required this.title,
+    required this.content,
+  });
+}
+
 class AcannieController with ChangeNotifier {
   // コンストラクタ
   AcannieController() {
@@ -67,6 +78,18 @@ class AcannieController with ChangeNotifier {
       content: Favorite(),
       lineLength: 11,
     ),
+  ];
+
+  List<TerminalContent> terminalContents = [
+    TerminalContent(
+      title: "TERMINAL",
+      content: Text(
+          "aaaaa\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\n",
+          style: TextStyle(color: Colors.white)),
+    ),
+    TerminalContent(title: "DEBUG CONSOLE", content: Text("test")),
+    TerminalContent(title: "PROBLEMS", content: Text("test")),
+    TerminalContent(title: "OUTPUT", content: Text("test")),
   ];
 
   // 変数
