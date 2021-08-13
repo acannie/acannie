@@ -192,6 +192,13 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomBar(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        child: const Icon(Icons.web_asset),
+        backgroundColor: Color.fromARGB(255, 104, 33, 122),
+      ),
     );
   }
 }
