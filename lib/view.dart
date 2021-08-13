@@ -202,12 +202,15 @@ class MyHomePage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: BottomBar(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _controller.switchTerminalActivity();
-        },
-        child: const Icon(Icons.web_asset),
-        backgroundColor: Color.fromARGB(255, 104, 33, 122),
+      floatingActionButton: Visibility(
+        visible: !_controller.terminalActive,
+        child: FloatingActionButton(
+          onPressed: () {
+            _controller.switchTerminalActivity();
+          },
+          child: const Icon(Icons.web_asset),
+          backgroundColor: Color.fromARGB(255, 104, 33, 122),
+        ),
       ),
     );
   }
