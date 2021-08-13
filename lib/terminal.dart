@@ -10,6 +10,7 @@ class Terminal extends StatelessWidget {
   Widget build(BuildContext context) {
     final AcannieController _controller =
         Provider.of<AcannieController>(context);
+
     return DefaultTabController(
       length: _controller.terminalContents.length,
       child: Builder(
@@ -72,11 +73,84 @@ class Terminal extends StatelessWidget {
                                   ],
                                 ),
                                 Expanded(child: Container()),
+                                // ボタン群
                                 Align(
                                   alignment: Alignment.centerRight,
-                                  child: InkWell(
-                                    child: Icon(Icons.delete),
-                                    onTap: () {},
+                                  child: Row(
+                                    children: [
+                                      // Bash
+                                      InkWell(
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.view_in_ar,
+                                              color: Layout.terminalIconButton,
+                                            ),
+                                            Text(
+                                              "bash",
+                                              style: TextStyle(
+                                                color:
+                                                    Layout.terminalIconButton,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        onTap: () {},
+                                      ),
+                                      // new terminal
+                                      InkWell(
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.add,
+                                              color: Layout.terminalIconButton,
+                                            ),
+                                            Icon(
+                                              Icons.keyboard_arrow_down,
+                                              color: Layout.terminalIconButton,
+                                              size: 10,
+                                            ),
+                                          ],
+                                        ),
+                                        onTap: () {},
+                                      ),
+                                      // split terminal
+                                      InkWell(
+                                        child: Icon(
+                                          Icons.view_column_outlined,
+                                          color: Layout.terminalIconButton,
+                                        ),
+                                        onTap: () {},
+                                      ),
+                                      // delete
+                                      InkWell(
+                                        child: Icon(
+                                          Icons.delete,
+                                          color: Layout.terminalIconButton,
+                                        ),
+                                        onTap: () {
+                                          _controller.switchTerminalActivity();
+                                        },
+                                      ),
+                                      // maximize panel size
+                                      InkWell(
+                                        child: Icon(
+                                          Icons.keyboard_arrow_up,
+                                          color: Layout.terminalIconButton,
+                                        ),
+                                        onTap: () {},
+                                      ),
+                                      // close panel
+                                      InkWell(
+                                        child: Icon(
+                                          Icons.close,
+                                          color: Layout.terminalIconButton,
+                                        ),
+                                        onTap: () {
+                                          _controller.switchTerminalActivity();
+                                        },
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],

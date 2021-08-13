@@ -35,6 +35,7 @@ class Layout {
       Color.fromARGB(255, 231, 231, 231);
   static const Color terminalTabBarNonActiveLabel =
       Color.fromARGB(255, 151, 151, 151);
+  static const Color terminalIconButton = Color.fromARGB(255, 197, 197, 197);
 
   static Text titleText(String title) {
     return Text(
