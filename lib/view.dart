@@ -62,134 +62,139 @@ class MyHomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: headerBar(),
-      body: DefaultTabController(
-        length: _controller.pageContents.length,
-        child: Builder(
-          builder: (BuildContext context) {
-            final AcannieController _controller =
-                Provider.of<AcannieController>(context);
+      body: Row(
+        children: [
+          LeftBar(),
+          DefaultTabController(
+            length: _controller.pageContents.length,
+            child: Builder(
+              builder: (BuildContext context) {
+                final TabController tabController =
+                    DefaultTabController.of(context)!;
+                tabController.addListener(() {
+                  if (!tabController.indexIsChanging) {
+                    _controller.setActivePage(tabController.index);
+                  }
+                });
 
-            final TabController tabController =
-                DefaultTabController.of(context)!;
-            tabController.addListener(() {
-              if (!tabController.indexIsChanging) {
-                _controller.setActivePage(tabController.index);
-              }
-            });
-
-            // 左側のバーのアイコン関連の情報一覧
-            List<LeftBarListContent> leftBarListContents = [
-              LeftBarListContent(
-                iconData: Icons.file_copy_outlined,
-                content: FileList(tabController: tabController),
-              ),
-              LeftBarListContent(
-                iconData: Icons.search,
-                content: Search(),
-              ),
-              LeftBarListContent(
-                iconData: Icons.bug_report,
-                content: BugReport(),
-              ),
-            ];
-
-            return Row(
-              children: [
-                LeftBar(),
-
-                // 左側のバーのアイコンをタップしたときに表示される領域
-                for (int i = 0; i < leftBarListContents.length; i++)
-                  Visibility(
-                    child: leftBarListContents[i].content,
-                    visible: _controller.leftListActive &&
-                        _controller.activeLeftBarIconIndex == i,
+                // 左側のバーのアイコン関連の情報一覧
+                List<LeftBarListContent> leftBarListContents = [
+                  LeftBarListContent(
+                    iconData: Icons.file_copy_outlined,
+                    content: FileList(tabController: tabController),
                   ),
+                  LeftBarListContent(
+                    iconData: Icons.search,
+                    content: Search(),
+                  ),
+                  LeftBarListContent(
+                    iconData: Icons.bug_report,
+                    content: BugReport(),
+                  ),
+                ];
 
-                Expanded(
-                  child: Column(
+                return Expanded(
+                  child: Row(
                     children: [
-                      // ページのタブ
-                      Container(
-                        height: 40,
-                        child: Ink(
-                          color: Layout.tabBarBg,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Ink(
-                              color: Layout.tabBarNonActiveBg,
-                              child: TabBar(
-                                labelPadding: EdgeInsets.zero,
-                                indicatorPadding: EdgeInsets.zero,
-                                indicatorSize: TabBarIndicatorSize.label,
-                                indicator:
-                                    BoxDecoration(color: Layout.tabBarActiveBg),
-                                labelColor: Layout.tabBarActiveLabel,
-                                unselectedLabelColor:
-                                    Layout.tabBarNonActiveLabel,
+                      // 左側のバーのアイコンをタップしたときに表示される領域
+                      for (int i = 0; i < leftBarListContents.length; i++)
+                        Visibility(
+                          child: leftBarListContents[i].content,
+                          visible: _controller.leftListActive &&
+                              _controller.activeLeftBarIconIndex == i,
+                        ),
+
+                      Expanded(
+                        child: Column(
+                          children: [
+                            // ページのタブ
+                            Container(
+                              height: 40,
+                              child: Ink(
+                                color: Layout.tabBarBg,
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Ink(
+                                    color: Layout.tabBarNonActiveBg,
+                                    child: TabBar(
+                                      labelPadding: EdgeInsets.zero,
+                                      indicatorPadding: EdgeInsets.zero,
+                                      indicatorSize: TabBarIndicatorSize.label,
+                                      indicator: BoxDecoration(
+                                          color: Layout.tabBarActiveBg),
+                                      labelColor: Layout.tabBarActiveLabel,
+                                      unselectedLabelColor:
+                                          Layout.tabBarNonActiveLabel,
+                                      controller: tabController,
+                                      isScrollable: true,
+                                      tabs: [
+                                        for (PageContent pageContent
+                                            in _controller.pageContents)
+                                          Tab(
+                                            icon: Container(
+                                              decoration: BoxDecoration(
+                                                border: Border(
+                                                  right: BorderSide(
+                                                      color: Layout.tabBarBg),
+                                                ),
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Padding(
+                                                    padding: EdgeInsets.all(7),
+                                                  ),
+                                                  Icon(
+                                                    pageContent.iconData,
+                                                    color:
+                                                        pageContent.iconColor,
+                                                    size: 15,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 3),
+                                                  ),
+                                                  Text(
+                                                    pageContent.title,
+                                                  ),
+                                                  Padding(
+                                                    padding: EdgeInsets.all(25),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            // ページ本体
+                            Expanded(
+                              child: TabBarView(
                                 controller: tabController,
-                                isScrollable: true,
-                                tabs: [
+                                children: <Widget>[
                                   for (PageContent pageContent
                                       in _controller.pageContents)
-                                    Tab(
-                                      icon: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border(
-                                            right: BorderSide(
-                                                color: Layout.tabBarBg),
-                                          ),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.all(7),
-                                            ),
-                                            Icon(
-                                              pageContent.iconData,
-                                              color: pageContent.iconColor,
-                                              size: 15,
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 3),
-                                            ),
-                                            Text(
-                                              pageContent.title,
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.all(25),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                    Container(
+                                      child:
+                                          ContentView(pageContent: pageContent),
+                                      color: Layout.tabBarActiveBg,
                                     ),
                                 ],
                               ),
                             ),
-                          ),
-                        ),
-                      ),
-                      // ページ本体
-                      Expanded(
-                        child: TabBarView(
-                          controller: tabController,
-                          children: <Widget>[
-                            for (PageContent pageContent
-                                in _controller.pageContents)
-                              Container(
-                                child: ContentView(pageContent: pageContent),
-                                color: Layout.tabBarActiveBg,
-                              ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            );
-          },
-        ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomBar(),
       floatingActionButton: FloatingActionButton(
