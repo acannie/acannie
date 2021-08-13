@@ -6,6 +6,7 @@ import 'contact.dart';
 import 'works.dart';
 import 'engineering.dart';
 import 'favorite.dart';
+import 'layout.dart';
 
 // Page
 class PageContent {
@@ -83,9 +84,35 @@ class AcannieController with ChangeNotifier {
   List<TerminalContent> terminalContents = [
     TerminalContent(
       title: "TERMINAL",
-      content: Text(
-          "aaaaa\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\nbbbbbbb",
-          style: TextStyle(color: Colors.white)),
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          RichText(
+            text: TextSpan(
+              style: TextStyle(color: Layout.terminalStdInput),
+              children: [
+                TextSpan(
+                  text: "acannie@homepage",
+                  style: TextStyle(color: Layout.terminalMachineName),
+                ),
+                TextSpan(
+                  text: ":",
+                ),
+                TextSpan(
+                  text: "~/acannie/homepage",
+                  style: TextStyle(color: Layout.terminalCurrentPath),
+                ),
+                TextSpan(
+                  text: "\$ ",
+                ),
+                TextSpan(
+                  text: "ls -la > test.txt",
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     ),
     TerminalContent(
       title: "DEBUG CONSOLE",
