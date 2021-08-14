@@ -11,7 +11,7 @@ import 'left_bar.dart';
 import 'file_list.dart';
 import 'search.dart';
 import 'bug_report.dart';
-import 'terminal.dart';
+import 'panel.dart';
 
 // 左側のバーのアイコン関連の情報
 class LeftBarListContent {
@@ -186,11 +186,11 @@ class MyHomePage extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            // Terminal部
+                            // Panel 部
                             Visibility(
                               child: Expanded(
                                 flex: 1,
-                                child: Terminal(),
+                                child: Panel(),
                               ),
                               visible: _controller.terminalActive,
                             ),

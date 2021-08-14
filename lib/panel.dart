@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'layout.dart';
 import 'controller.dart';
 
-class Terminal extends StatelessWidget {
+class Panel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AcannieController _controller =
