@@ -29,43 +29,36 @@ class Panel extends StatelessWidget {
                   color: Layout.tabBarActiveBg,
                 ),
                 height: 40,
-                child: Ink(
-                  color: Layout.tabBarBg,
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Ink(
-                      color: Layout.tabBarNonActiveBg,
-                      child: TabBar(
-                        labelPadding: EdgeInsets.all(2.0),
-                        indicatorPadding: EdgeInsets.symmetric(horizontal: 10),
-                        labelColor: Layout.terminalTabBarActiveLabel,
-                        indicatorWeight: 1.0,
-                        unselectedLabelColor:
-                            Layout.terminalTabBarNonActiveLabel,
-                        indicatorColor: Layout.terminalTabBarActiveLabel,
-                        isScrollable: true,
-                        tabs: [
-                          for (TerminalContent terminalContent
-                              in _controller.terminalContents)
-                            Tab(
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.all(5),
-                                  ),
-                                  Text(
-                                    terminalContent.title,
-                                    style: TextStyle(fontSize: 11),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(5),
-                                  ),
-                                ],
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: TabBar(
+                    labelPadding: EdgeInsets.all(2.0),
+                    indicatorPadding: EdgeInsets.symmetric(horizontal: 10),
+                    labelColor: Layout.terminalTabBarActiveLabel,
+                    indicatorWeight: 1.0,
+                    unselectedLabelColor: Layout.terminalTabBarNonActiveLabel,
+                    indicatorColor: Layout.terminalTabBarActiveLabel,
+                    isScrollable: true,
+                    tabs: [
+                      for (TerminalContent terminalContent
+                          in _controller.terminalContents)
+                        Tab(
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(5),
                               ),
-                            ),
-                        ],
-                      ),
-                    ),
+                              Text(
+                                terminalContent.title,
+                                style: TextStyle(fontSize: 11),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(5),
+                              ),
+                            ],
+                          ),
+                        ),
+                    ],
                   ),
                 ),
               ),
