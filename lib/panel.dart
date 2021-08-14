@@ -17,132 +17,138 @@ class Panel extends StatelessWidget {
         builder: (BuildContext context) {
           return Column(
             children: [
-              // ページのタブ
-              Container(
-                decoration: BoxDecoration(
-                  border: const Border(
-                    top: const BorderSide(
-                      color: Layout.terminalBorder,
-                      width: 1,
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: const Border(
+                          top: const BorderSide(
+                            color: Layout.terminalBorder,
+                            width: 1,
+                          ),
+                        ),
+                        color: Layout.tabBarActiveBg,
+                      ),
+                      height: 40,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: TabBar(
+                          labelPadding: EdgeInsets.all(2.0),
+                          indicatorPadding:
+                              EdgeInsets.symmetric(horizontal: 10),
+                          labelColor: Layout.terminalTabBarActiveLabel,
+                          indicatorWeight: 1.0,
+                          unselectedLabelColor:
+                              Layout.terminalTabBarNonActiveLabel,
+                          indicatorColor: Layout.terminalTabBarActiveLabel,
+                          isScrollable: true,
+                          tabs: [
+                            for (TerminalContent terminalContent
+                                in _controller.terminalContents)
+                              Tab(
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.all(5),
+                                    ),
+                                    Text(
+                                      terminalContent.title,
+                                      style: TextStyle(fontSize: 11),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(5),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                  color: Layout.tabBarActiveBg,
-                ),
-                height: 40,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: TabBar(
-                    labelPadding: EdgeInsets.all(2.0),
-                    indicatorPadding: EdgeInsets.symmetric(horizontal: 10),
-                    labelColor: Layout.terminalTabBarActiveLabel,
-                    indicatorWeight: 1.0,
-                    unselectedLabelColor: Layout.terminalTabBarNonActiveLabel,
-                    indicatorColor: Layout.terminalTabBarActiveLabel,
-                    isScrollable: true,
-                    tabs: [
-                      for (TerminalContent terminalContent
-                          in _controller.terminalContents)
-                        Tab(
+                  // ボタン群
+                  Container(
+                    height: 40,
+                    color: Layout.tabBarActiveBg,
+                    child: Row(
+                      children: [
+                        // Bash
+                        InkWell(
                           child: Row(
                             children: [
-                              Padding(
-                                padding: EdgeInsets.all(5),
+                              Icon(
+                                Icons.view_in_ar,
+                                color: Layout.terminalIconButton,
                               ),
                               Text(
-                                terminalContent.title,
-                                style: TextStyle(fontSize: 11),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(5),
+                                "bash",
+                                style: TextStyle(
+                                  color: Layout.terminalIconButton,
+                                ),
                               ),
                             ],
                           ),
+                          onTap: () {},
                         ),
-                    ],
+                        // new terminal
+                        InkWell(
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.add,
+                                color: Layout.terminalIconButton,
+                              ),
+                              Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Layout.terminalIconButton,
+                                size: 10,
+                              ),
+                            ],
+                          ),
+                          onTap: () {},
+                        ),
+                        // split terminal
+                        InkWell(
+                          child: Icon(
+                            Icons.view_column_outlined,
+                            color: Layout.terminalIconButton,
+                          ),
+                          onTap: () {},
+                        ),
+                        // delete
+                        InkWell(
+                          child: Icon(
+                            Icons.delete,
+                            color: Layout.terminalIconButton,
+                          ),
+                          onTap: () {
+                            _controller.switchTerminalActivity();
+                          },
+                        ),
+                        // maximize panel size
+                        InkWell(
+                          child: Icon(
+                            Icons.keyboard_arrow_up,
+                            color: Layout.terminalIconButton,
+                          ),
+                          onTap: () {},
+                        ),
+                        // close panel
+                        InkWell(
+                          child: Icon(
+                            Icons.close,
+                            color: Layout.terminalIconButton,
+                          ),
+                          onTap: () {
+                            _controller.switchTerminalActivity();
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                ],
               ),
-              // ボタン群
-              // Align(
-              //   alignment: Alignment.centerRight,
-              //   child: Row(
-              //     children: [
-              //       // Bash
-              //       InkWell(
-              //         child: Row(
-              //           children: [
-              //             Icon(
-              //               Icons.view_in_ar,
-              //               color: Layout.terminalIconButton,
-              //             ),
-              //             Text(
-              //               "bash",
-              //               style: TextStyle(
-              //                 color:
-              //                     Layout.terminalIconButton,
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //         onTap: () {},
-              //       ),
-              //       // new terminal
-              //       InkWell(
-              //         child: Row(
-              //           children: [
-              //             Icon(
-              //               Icons.add,
-              //               color: Layout.terminalIconButton,
-              //             ),
-              //             Icon(
-              //               Icons.keyboard_arrow_down,
-              //               color: Layout.terminalIconButton,
-              //               size: 10,
-              //             ),
-              //           ],
-              //         ),
-              //         onTap: () {},
-              //       ),
-              //       // split terminal
-              //       InkWell(
-              //         child: Icon(
-              //           Icons.view_column_outlined,
-              //           color: Layout.terminalIconButton,
-              //         ),
-              //         onTap: () {},
-              //       ),
-              //       // delete
-              //       InkWell(
-              //         child: Icon(
-              //           Icons.delete,
-              //           color: Layout.terminalIconButton,
-              //         ),
-              //         onTap: () {
-              //           _controller.switchTerminalActivity();
-              //         },
-              //       ),
-              //       // maximize panel size
-              //       InkWell(
-              //         child: Icon(
-              //           Icons.keyboard_arrow_up,
-              //           color: Layout.terminalIconButton,
-              //         ),
-              //         onTap: () {},
-              //       ),
-              //       // close panel
-              //       InkWell(
-              //         child: Icon(
-              //           Icons.close,
-              //           color: Layout.terminalIconButton,
-              //         ),
-              //         onTap: () {
-              //           _controller.switchTerminalActivity();
-              //         },
-              //       ),
-              //     ],
-              //   ),
-              // ),
-
               // ページ本体
               Expanded(
                 child: TabBarView(
