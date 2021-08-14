@@ -142,9 +142,6 @@ class AcannieController with ChangeNotifier {
   bool get terminalActive => _terminalActive; // Terminal が表示モードか
   bool _terminalActive = false;
 
-  TabController? get pageTabController => _pageTabController;
-  TabController? _pageTabController;
-
   // 関数
   void setActivePage(int pageIndex) {
     _activePageIndex = pageIndex;
@@ -165,11 +162,6 @@ class AcannieController with ChangeNotifier {
 
   void switchTerminalActivity() {
     _terminalActive = !_terminalActive;
-    notifyListeners();
-  }
-
-  void setPageTabController(BuildContext context) {
-    _pageTabController = DefaultTabController.of(context)!;
     notifyListeners();
   }
 }

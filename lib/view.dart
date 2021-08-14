@@ -68,11 +68,12 @@ class MyHomePage extends StatelessWidget {
             length: _controller.pageContents.length,
             child: Builder(
               builder: (BuildContext context) {
-                _controller.setPageTabController(context);
-                _controller.pageTabController!.addListener(() {
-                  if (!_controller.pageTabController!.indexIsChanging) {
-                    _controller
-                        .setActivePage(_controller.pageTabController!.index);
+                final TabController tabController =
+                    DefaultTabController.of(context)!;
+
+                tabController.addListener(() {
+                  if (!tabController.indexIsChanging) {
+                    _controller.setActivePage(tabController.index);
                   }
                 });
 
@@ -80,7 +81,7 @@ class MyHomePage extends StatelessWidget {
                 List<LeftBarListContent> leftBarListContents = [
                   LeftBarListContent(
                     iconData: Icons.file_copy_outlined,
-                    content: FileList(),
+                    content: FileList(tabController: tabController),
                   ),
                   LeftBarListContent(
                     iconData: Icons.search,
@@ -124,8 +125,7 @@ class MyHomePage extends StatelessWidget {
                                       labelColor: Layout.tabBarActiveLabel,
                                       unselectedLabelColor:
                                           Layout.tabBarNonActiveLabel,
-                                      controller:
-                                          _controller.pageTabController!,
+                                      controller: tabController,
                                       isScrollable: true,
                                       tabs: [
                                         for (PageContent pageContent
@@ -174,7 +174,7 @@ class MyHomePage extends StatelessWidget {
                             Expanded(
                               flex: 2,
                               child: TabBarView(
-                                controller: _controller.pageTabController!,
+                                controller: tabController,
                                 children: <Widget>[
                                   for (PageContent pageContent
                                       in _controller.pageContents)
