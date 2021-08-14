@@ -187,12 +187,12 @@ class MyHomePage extends StatelessWidget {
                               ),
                             ),
                             // Terminal部
-                            Expanded(
-                              flex: 1,
-                              child: Visibility(
+                            Visibility(
+                              child: Expanded(
+                                flex: 1,
                                 child: Terminal(),
-                                visible: _controller.terminalActive,
                               ),
+                              visible: _controller.terminalActive,
                             ),
                           ],
                         ),
