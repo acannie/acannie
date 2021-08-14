@@ -82,11 +82,15 @@ class Panel extends StatelessWidget {
                                   "bash",
                                   style: TextStyle(
                                     color: Layout.terminalIconButton,
+                                    fontSize: 12,
                                   ),
                                 ),
                               ],
                             ),
                             onTap: () {},
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 3),
                           ),
                           // new terminal
                           InkWell(
@@ -95,47 +99,64 @@ class Panel extends StatelessWidget {
                                 Icon(
                                   Icons.add,
                                   color: Layout.terminalIconButton,
+                                  size: 20,
                                 ),
                                 Icon(
                                   Icons.keyboard_arrow_down,
                                   color: Layout.terminalIconButton,
-                                  size: 10,
+                                  size: 15,
                                 ),
                               ],
                             ),
                             onTap: () {},
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 3),
                           ),
                           // split terminal
                           InkWell(
                             child: Icon(
                               Icons.view_column_outlined,
                               color: Layout.terminalIconButton,
+                              size: 20,
                             ),
                             onTap: () {},
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 3),
                           ),
                           // delete
                           InkWell(
                             child: Icon(
                               Icons.delete,
                               color: Layout.terminalIconButton,
+                              size: 20,
                             ),
                             onTap: () {
                               _controller.switchTerminalActivity();
                             },
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 3),
                           ),
                           // maximize panel size
                           InkWell(
                             child: Icon(
                               Icons.keyboard_arrow_up,
                               color: Layout.terminalIconButton,
+                              size: 20,
                             ),
                             onTap: () {},
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 3),
                           ),
                           // close panel
                           InkWell(
                             child: Icon(
                               Icons.close,
                               color: Layout.terminalIconButton,
+                              size: 15,
                             ),
                             onTap: () {
                               _controller.switchTerminalActivity();
@@ -143,6 +164,9 @@ class Panel extends StatelessWidget {
                           ),
                         ],
                       ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
                     ),
                   ],
                 ),
