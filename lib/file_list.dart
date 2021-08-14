@@ -21,10 +21,10 @@ class DropDownListCotroller with ChangeNotifier {
 }
 
 class FileList extends StatelessWidget {
-  // final TabController tabController;
+  final TabController tabController;
 
   // 受け取る値を上記の変数に代入
-  // FileList({required this.tabController});
+  FileList({required this.tabController});
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +130,7 @@ class FileList extends StatelessWidget {
                           ),
                           onPressed: () => {
                             _controller.setActivePage(index),
-                            _controller.pageTabController!
+                            tabController
                                 .animateTo(_controller.activePageIndex),
                           },
                         ),
