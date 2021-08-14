@@ -31,6 +31,7 @@ class Layout {
       Color.fromARGB(255, 133, 133, 133);
 
   // Terminal 関連
+  static const Color terminalBorder = Color.fromARGB(255, 65, 65, 65);
   static const Color terminalTabBarActiveLabel =
       Color.fromARGB(255, 231, 231, 231);
   static const Color terminalTabBarNonActiveLabel =
