@@ -140,7 +140,7 @@ class AcannieController with ChangeNotifier {
   List<PageContent>? _selectedPageContents;
 
   bool get terminalActive => _terminalActive; // Terminal が表示モードか
-  bool _terminalActive = true;
+  bool _terminalActive = false;
 
   TabController? get pageTabController => _pageTabController;
   TabController? _pageTabController;
