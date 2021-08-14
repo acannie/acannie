@@ -6,6 +6,7 @@ import 'contact.dart';
 import 'works.dart';
 import 'engineering.dart';
 import 'favorite.dart';
+import 'layout.dart';
 
 // Page
 class PageContent {
@@ -21,6 +22,17 @@ class PageContent {
     required this.title,
     required this.content,
     required this.lineLength,
+  });
+}
+
+// Terminal Content
+class TerminalContent {
+  String title;
+  Widget content;
+
+  TerminalContent({
+    required this.title,
+    required this.content,
   });
 }
 
@@ -69,6 +81,51 @@ class AcannieController with ChangeNotifier {
     ),
   ];
 
+  List<TerminalContent> terminalContents = [
+    TerminalContent(
+      title: "TERMINAL",
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          RichText(
+            text: TextSpan(
+              style: TextStyle(color: Layout.terminalStdInput),
+              children: [
+                TextSpan(
+                  text: "acannie@homepage",
+                  style: TextStyle(color: Layout.terminalMachineName),
+                ),
+                TextSpan(
+                  text: ":",
+                ),
+                TextSpan(
+                  text: "~/acannie/homepage",
+                  style: TextStyle(color: Layout.terminalCurrentPath),
+                ),
+                TextSpan(
+                  text: "\$ ",
+                ),
+                TextSpan(
+                  text: "ls -la > test.txt",
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+    TerminalContent(
+      title: "DEBUG CONSOLE",
+      content: Text("Coming Soon!", style: TextStyle(color: Colors.white)),
+    ),
+    TerminalContent(
+        title: "PROBLEMS",
+        content: Text("Coming Soon!", style: TextStyle(color: Colors.white))),
+    TerminalContent(
+        title: "OUTPUT",
+        content: Text("Coming Soon!", style: TextStyle(color: Colors.white))),
+  ];
+
   // 変数
   int get activePageIndex => _activePageIndex;
   int _activePageIndex = 0;
@@ -81,6 +138,12 @@ class AcannieController with ChangeNotifier {
 
   List<PageContent>? get selectedPageContents => _selectedPageContents;
   List<PageContent>? _selectedPageContents;
+
+  bool get terminalActive => _terminalActive; // Terminal が表示モードか
+  bool _terminalActive = false;
+
+  TabController? get pageTabController => _pageTabController;
+  TabController? _pageTabController;
 
   // 関数
   void setActivePage(int pageIndex) {
@@ -97,6 +160,16 @@ class AcannieController with ChangeNotifier {
     }
     _leftListActive = true;
     _activeLeftBarIconIndex = index;
+    notifyListeners();
+  }
+
+  void switchTerminalActivity() {
+    _terminalActive = !_terminalActive;
+    notifyListeners();
+  }
+
+  void setPageTabController(BuildContext context) {
+    _pageTabController = DefaultTabController.of(context)!;
     notifyListeners();
   }
 }

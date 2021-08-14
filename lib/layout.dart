@@ -30,6 +30,17 @@ class Layout {
   static const Color fileListNonActiveLabel =
       Color.fromARGB(255, 133, 133, 133);
 
+  // Terminal 関連
+  static const Color terminalBorder = Color.fromARGB(255, 65, 65, 65);
+  static const Color terminalTabBarActiveLabel =
+      Color.fromARGB(255, 231, 231, 231);
+  static const Color terminalTabBarNonActiveLabel =
+      Color.fromARGB(255, 151, 151, 151);
+  static const Color terminalIconButton = Color.fromARGB(255, 197, 197, 197);
+  static const Color terminalCurrentPath = Color.fromARGB(255, 55, 131, 214);
+  static const Color terminalMachineName = Color.fromARGB(255, 34, 195, 130);
+  static const Color terminalStdInput = Color.fromARGB(255, 204, 204, 204);
+
   static Text titleText(String title) {
     return Text(
       title,
