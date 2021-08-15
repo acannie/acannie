@@ -191,6 +191,7 @@ class Terminal extends StatelessWidget {
     final TerminalController _terminalController =
         Provider.of<TerminalController>(context);
     final TextEditingController _textController = TextEditingController();
+    FocusNode _myFocusNode = FocusNode();
 
     // Terminal のフォント共通スタイル
     const TextStyle _terminalTextStyle = TextStyle(
@@ -277,9 +278,11 @@ class Terminal extends StatelessWidget {
                 maxLines: 1,
                 inputFormatters: [],
                 controller: _textController,
+                focusNode: _myFocusNode,
                 onFieldSubmitted: (command) {
                   _terminalController.confirmStdIn(command);
                   _textController.clear();
+                  _myFocusNode.requestFocus();
                 },
               ),
             ),
