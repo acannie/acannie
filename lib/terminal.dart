@@ -69,7 +69,7 @@ class TerminalController with ChangeNotifier {
   // カレントディレクトリのパスを標準出力
   void _runPwd(List<String> commandArgs) {
     this._currentCommandLine.stdout =
-        this._Slashless(this._toFullPath(this._currentDir));
+        this._slashless(this._toFullPath(this._currentDir));
   }
 
   void _runHelp(List<String> commandArgs) {}
@@ -84,9 +84,10 @@ class TerminalController with ChangeNotifier {
 
   // コマンドを終了し、新たなコマンドラインを追加
   void _addCommandLine() {
+    this._deleteNewLine();
     this._commandLines.add(this._currentCommandLine);
     this._currentCommandLine = CommandLine(
-      currentDir: this._Slashless(this._toShortPath(this._currentDir)),
+      currentDir: this._slashless(this._toShortPath(this._currentDir)),
       stdin: "",
       stdout: "",
     );
@@ -118,7 +119,7 @@ class TerminalController with ChangeNotifier {
   }
 
   // パスの末尾のスラッシュを除去
-  String _Slashless(String path) {
+  String _slashless(String path) {
     if (path.isEmpty || path.length == 1) {
       return path;
     }
@@ -134,6 +135,15 @@ class TerminalController with ChangeNotifier {
       return path;
     }
     return path + "/";
+  }
+
+  // 標準出力末尾の \n を除去
+  void _deleteNewLine() {
+    String stdout = this._currentCommandLine.stdout;
+    if (!stdout.endsWith("\n")) {
+      return;
+    }
+    this._currentCommandLine.stdout = stdout.substring(0, stdout.length - 1);
   }
 
   // *********************************
