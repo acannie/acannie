@@ -79,22 +79,29 @@ class TerminalController with ChangeNotifier {
 
   // 操作ガイドを表示
   void _runHelp(List<String> commandArgs) {
+    final Map<String, String> commandDescriptions = {
+      // "cat [file]": "open txt or md files.",
+      // "cd [dir]": "change directory.",
+      "date": "show date.",
+      "history": "command history.",
+      // "imgcat [img_file]": "open png files.",
+      // "ls [-a]": "list segments.",
+      // "open [link_file]": "open links.",
+      "share [ -fb | -tw ]": "share this page on SNS.",
+    };
     this._currentCommandLine.stdout = "";
     this._currentCommandLine.stdout += "Welcome to CUI for Acannie HomePage!\n";
     this._currentCommandLine.stdout += "Basic commands\n";
     this._currentCommandLine.stdout += "\n";
-    // this._currentCommandLine.stdout += "\tcat [file]".padRight(21, " ") + ":open txt or md files.\n";
-    // this._currentCommandLine.stdout += "\tcd [dir]".padRight(21, " ") + ":change directory.\n";
-    this._currentCommandLine.stdout +=
-        "\tdate".padRight(21, " ") + ":show date.\n";
-    this._currentCommandLine.stdout +=
-        "\thistory".padRight(21, " ") + ":command history.\n";
-    // this._currentCommandLine.stdout += "\timgcat [img_file]".padRight(21, " ") + ":open png files.\n";
-    // this._currentCommandLine.stdout += "\tls [-a]".padRight(21, " ") + ":list segments.\n";
-    // this._currentCommandLine.stdout += "\topen [link_file]".padRight(21, " ") + ":open links.\n";
-    this._currentCommandLine.stdout +=
-        "\tshare [ -fb | -tw ]".padRight(21, " ") +
-            ":share this page on SNS.\n";
+
+    // 各コマンドの説明を追加
+    commandDescriptions.forEach((command, description) {
+      this._currentCommandLine.stdout += "\t";
+      this._currentCommandLine.stdout += command.padRight(21, " ");
+      this._currentCommandLine.stdout += ":";
+      this._currentCommandLine.stdout += description;
+      this._currentCommandLine.stdout += "\n";
+    });
   }
 
   // 現在のタイムスタンプを表示
