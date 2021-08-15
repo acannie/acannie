@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'layout.dart';
 import 'controller.dart';
@@ -52,6 +53,7 @@ class TerminalController with ChangeNotifier {
       "help": this._runHelp,
       "date": this._runHelp,
       "history": this._runHistory,
+      "share": this._runShare,
     };
 
     // 入力なしまたはスペースのみの場合
@@ -88,7 +90,8 @@ class TerminalController with ChangeNotifier {
     // this._currentCommandLine.stdout += "\timgcat [img_file]\t\t\t:open png files.\n";
     // this._currentCommandLine.stdout += "\tls [-a]\t\t\t:list segments.\n";
     // this._currentCommandLine.stdout += "\topen [link_file]\t\t\t:open links.\n";
-    // this._currentCommandLine.stdout += "\tshare [ -fb | -tw ]\t\t\t:share this page on SNS.\n";
+    this._currentCommandLine.stdout +=
+        "\tshare [ -fb | -tw ]\t\t\t:share this page on SNS.\n";
   }
 
   // 現在のタイムスタンプを表示
@@ -97,7 +100,7 @@ class TerminalController with ChangeNotifier {
     this._currentCommandLine.stdout = now.toString();
   }
 
-// コマンドの履歴を標準出力
+  // コマンドの履歴を標準出力
   void _runHistory(List<String> commandArgs) {
     this._currentCommandLine.stdout = "";
     int count = 0;
@@ -108,6 +111,31 @@ class TerminalController with ChangeNotifier {
       this._currentCommandLine.stdout += commandLine.stdin;
       this._currentCommandLine.stdout += "\n";
       count++;
+    }
+  }
+
+  // 新しいタブで URL のページを開く
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  // ページを SNS でシェア
+  void _runShare(List<String> commandArgs) {
+    if ((commandArgs.length != 2) ||
+        (commandArgs[1] != "-fb" && commandArgs[1] != "-tw")) {
+      this._currentCommandLine.stdout = "usage: share -fb | -tw\n";
+      return;
+    }
+    if (commandArgs[1] == "-fb") {
+      this._launchURL(
+          "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Facannie.github.io%2Facannie%2F");
+    } else if (commandArgs[1] == "-tw") {
+      this._launchURL(
+          "https://twitter.com/intent/tweet?url=https://acannie.github.io/acannie/&text=%23Acannie%0D%0A%23%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%0D%0A%23%E8%87%AA%E5%B7%B1%E7%B4%B9%E4%BB%8B%0D%0A%2322%E5%8D%92%0D%0A%23VSCode%0D%0A+Acannie%E3%81%AEVSCode%E9%A2%A8%E8%87%AA%E5%B7%B1%E7%B4%B9%E4%BB%8B%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%A0%E3%82%88%EF%BC%81%E3%81%BF%E3%82%93%E3%81%AA%E3%82%88%E3%82%8D%E3%81%97%E3%81%8F%E3%81%AD%EF%BC%81%0D%0A");
     }
   }
 
