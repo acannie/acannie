@@ -65,6 +65,10 @@ class TerminalController with ChangeNotifier {
       this._runDate(commandArgs);
       return;
     }
+    if (commandArgs[0] == "history") {
+      this._runHistory(commandArgs);
+      return;
+    }
     this._runCommandNotFound();
   }
 
@@ -85,7 +89,7 @@ class TerminalController with ChangeNotifier {
     // this._currentCommandLine.stdout += "\tcat [file]\t\t\t:open txt or md files.\n";
     // this._currentCommandLine.stdout += "\tcd [dir]\t\t\t:change directory.\n";
     this._currentCommandLine.stdout += "\tdate\t\t\t:show date.\n";
-    // this._currentCommandLine.stdout += "\thistory\t\t\t:command history.\n";
+    this._currentCommandLine.stdout += "\thistory\t\t\t:command history.\n";
     // this._currentCommandLine.stdout += "\timgcat [img_file]\t\t\t:open png files.\n";
     // this._currentCommandLine.stdout += "\tls [-a]\t\t\t:list segments.\n";
     // this._currentCommandLine.stdout += "\topen [link_file]\t\t\t:open links.\n";
@@ -96,6 +100,20 @@ class TerminalController with ChangeNotifier {
   void _runDate(List<String> commandArgs) {
     final DateTime now = DateTime.now();
     this._currentCommandLine.stdout = now.toString();
+  }
+
+// コマンドの履歴を標準出力
+  void _runHistory(List<String> commandArgs) {
+    this._currentCommandLine.stdout = "";
+    int count = 0;
+    for (CommandLine commandLine in this._commandLines) {
+      this._currentCommandLine.stdout += "\t";
+      this._currentCommandLine.stdout += count.toString().padLeft(5, ' ');
+      this._currentCommandLine.stdout += " ";
+      this._currentCommandLine.stdout += commandLine.stdin;
+      this._currentCommandLine.stdout += "\n";
+      count++;
+    }
   }
 
   // 想定外のコマンドが入力されたときの処理
