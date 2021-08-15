@@ -51,7 +51,7 @@ class TerminalController with ChangeNotifier {
       // "ls": this._runLs,
       "pwd": this._runPwd,
       "help": this._runHelp,
-      "date": this._runHelp,
+      "date": this._runDate,
       "history": this._runHistory,
       "share": this._runShare,
     };
@@ -122,6 +122,13 @@ class TerminalController with ChangeNotifier {
       this._currentCommandLine.stdout += "\n";
       count++;
     }
+
+    // 入力したばかりの help コマンドも標準出力
+    this._currentCommandLine.stdout += "\t";
+    this._currentCommandLine.stdout += count.toString().padLeft(5, ' ');
+    this._currentCommandLine.stdout += " ";
+    this._currentCommandLine.stdout += this._currentCommandLine.stdin;
+    this._currentCommandLine.stdout += "\n";
   }
 
   // 新しいタブで URL のページを開く
