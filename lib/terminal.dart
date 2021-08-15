@@ -44,7 +44,11 @@ class TerminalController with ChangeNotifier {
   // 現在のコマンド
   TerminalIO get currentTerminalIO => _currentTerminalIO;
   TerminalIO _currentTerminalIO =
-      TerminalIO(currentDir: "~/acannie/homepage", stdin: "", stdout: "");
+      TerminalIO(currentDir: "~", stdin: "", stdout: "");
+
+  // 現在のパス
+  String get currentDir => _currentDir;
+  String _currentDir = "/home/acannie/";
 
   // *********************************
   // * Private 関数                   *
@@ -72,7 +76,13 @@ class TerminalController with ChangeNotifier {
   }
 
   void _runLs(List<String> commandArgs) {}
-  void _runPwd(List<String> commandArgs) {}
+
+  // カレントディレクトリのパスを標準出力
+  void _runPwd(List<String> commandArgs) {
+    this._currentTerminalIO.stdout =
+        this._Slashless(this._toFullPath(this._currentDir));
+  }
+
   void _runHelp(List<String> commandArgs) {}
 
   // 想定外のコマンドが入力されたときの処理
@@ -87,7 +97,54 @@ class TerminalController with ChangeNotifier {
   void _addNewTerminalIO() {
     this._terminalIOs.add(this._currentTerminalIO);
     this._currentTerminalIO = TerminalIO(
-        currentDir: this._terminalIOs.last.currentDir, stdin: "", stdout: "");
+      currentDir: this._Slashless(this._toShortPath(this._currentDir)),
+      stdin: "",
+      stdout: "",
+    );
+  }
+
+  static String _shortHomeDirPath = "~/";
+  static String _fullHomeDirPath = "/home/acannie/";
+
+  // 短縮パスをフルパスに変換
+  String _toFullPath(String shortPath) {
+    if (shortPath.length < _shortHomeDirPath.length) {
+      return shortPath;
+    }
+    if (shortPath.substring(0, _shortHomeDirPath.length) != _shortHomeDirPath) {
+      return shortPath;
+    }
+    return _fullHomeDirPath + shortPath.substring(_shortHomeDirPath.length);
+  }
+
+  // フルパスを短縮パスに変換
+  String _toShortPath(String fullPath) {
+    if (fullPath.length < _fullHomeDirPath.length) {
+      return fullPath;
+    }
+    if (fullPath.substring(0, _fullHomeDirPath.length) != _fullHomeDirPath) {
+      return fullPath;
+    }
+    return _shortHomeDirPath + fullPath.substring(_fullHomeDirPath.length);
+  }
+
+  // パスの末尾のスラッシュを除去
+  String _Slashless(String path) {
+    if (path.isEmpty || path.length == 1) {
+      return path;
+    }
+    if (!path.endsWith("/")) {
+      return path;
+    }
+    return path.substring(0, path.length - 1);
+  }
+
+  // パスの末尾にスラッシュを追加
+  String _addSlash(String path) {
+    if (path.endsWith("/")) {
+      return path;
+    }
+    return path + "/";
   }
 
   // *********************************
