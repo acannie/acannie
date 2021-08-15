@@ -61,6 +61,10 @@ class TerminalController with ChangeNotifier {
       this._runHelp(commandArgs);
       return;
     }
+    if (commandArgs[0] == "date") {
+      this._runDate(commandArgs);
+      return;
+    }
     this._runCommandNotFound();
   }
 
@@ -78,14 +82,20 @@ class TerminalController with ChangeNotifier {
     this._currentCommandLine.stdout += "Welcome to CUI for Acannie HomePage!\n";
     this._currentCommandLine.stdout += "Basic commands\n";
     this._currentCommandLine.stdout += "\n";
-    // this._currentCommandLine.stdout += "\tcat [file] :open txt or md files.\n";
-    // this._currentCommandLine.stdout += "\tcd [dir] :change directory.\n";
-    // this._currentCommandLine.stdout += "\tdate :show date.\n";
-    // this._currentCommandLine.stdout += "\thistory :command history.\n";
-    // this._currentCommandLine.stdout += "\timgcat [img_file] :open png files.\n";
-    // this._currentCommandLine.stdout += "\tls [-a] :list segments.\n";
-    // this._currentCommandLine.stdout += "\topen [link_file] :open links.\n";
-    // this._currentCommandLine.stdout += "\tshare [ -fb | -tw ] :share this page on SNS.\n";
+    // this._currentCommandLine.stdout += "\tcat [file]\t\t\t:open txt or md files.\n";
+    // this._currentCommandLine.stdout += "\tcd [dir]\t\t\t:change directory.\n";
+    this._currentCommandLine.stdout += "\tdate\t\t\t:show date.\n";
+    // this._currentCommandLine.stdout += "\thistory\t\t\t:command history.\n";
+    // this._currentCommandLine.stdout += "\timgcat [img_file]\t\t\t:open png files.\n";
+    // this._currentCommandLine.stdout += "\tls [-a]\t\t\t:list segments.\n";
+    // this._currentCommandLine.stdout += "\topen [link_file]\t\t\t:open links.\n";
+    // this._currentCommandLine.stdout += "\tshare [ -fb | -tw ]\t\t\t:share this page on SNS.\n";
+  }
+
+  // 現在のタイムスタンプを表示
+  void _runDate(List<String> commandArgs) {
+    final DateTime now = DateTime.now();
+    this._currentCommandLine.stdout = now.toString();
   }
 
   // 想定外のコマンドが入力されたときの処理
