@@ -1,4 +1,3 @@
-import 'package:acannie/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
@@ -48,21 +47,58 @@ class TerminalController with ChangeNotifier {
       TerminalIO(currentDir: "~/acannie/homepage", stdin: "", stdout: "");
 
   // *********************************
-  // * 関数                          *
+  // * Private 関数                   *
   // *********************************
 
-  // コマンドが変更されたとき
-  void updateCommand(String command) {
-    _currentTerminalIO.stdin = command;
-    notifyListeners();
+  // コマンドを解釈
+  void _interpretCommand() {
+    List<String> commandArgs = this._currentTerminalIO.stdin.split(" ");
+    if (commandArgs.length == 0) {
+      return;
+    }
+    if (commandArgs[0] == "ls") {
+      this._runLs(commandArgs);
+      return;
+    }
+    if (commandArgs[0] == "pwd") {
+      this._runPwd(commandArgs);
+      return;
+    }
+    if (commandArgs[0] == "help") {
+      this._runHelp(commandArgs);
+      return;
+    }
+    this._runCommandNotFound();
   }
 
-  // Enter を押下して入力を確定したとき
+  void _runLs(List<String> commandArgs) {}
+  void _runPwd(List<String> commandArgs) {}
+  void _runHelp(List<String> commandArgs) {}
+
+  // 想定外のコマンドが入力されたときの処理
+  void _runCommandNotFound() {
+    this._currentTerminalIO.stdout = "";
+    this._currentTerminalIO.stdout += this._currentTerminalIO.stdin;
+    this._currentTerminalIO.stdout +=
+        ": Command not found.  Use 'help' to see the command list.\n";
+  }
+
+  // コマンドを終了し、新たなコマンドラインを追加
+  void _addNewTerminalIO() {
+    this._terminalIOs.add(this._currentTerminalIO);
+    this._currentTerminalIO = TerminalIO(
+        currentDir: this._terminalIOs.last.currentDir, stdin: "", stdout: "");
+  }
+
+  // *********************************
+  // * Public 関数                   *
+  // *********************************
+
+  // 入力を確定したときの処理
   void confirmStdIn(String command) {
-    _currentTerminalIO.stdin = command;
-    _terminalIOs.add(_currentTerminalIO);
-    _currentTerminalIO = TerminalIO(
-        currentDir: _terminalIOs.last.currentDir, stdin: "", stdout: "");
+    this._currentTerminalIO.stdin = command;
+    this._interpretCommand();
+    this._addNewTerminalIO();
     notifyListeners();
   }
 }
@@ -137,7 +173,7 @@ class Terminal extends StatelessWidget {
                       text: ":",
                     ),
                     TextSpan(
-                      text: _terminalController.terminalIOs.last.currentDir,
+                      text: _terminalController.currentTerminalIO.currentDir,
                       style: TextStyle(color: Layout.terminalCurrentPath),
                     ),
                     TextSpan(
