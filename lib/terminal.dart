@@ -182,7 +182,11 @@ class Terminal extends StatelessWidget {
                   Flexible(
                     child: RichText(
                       text: TextSpan(
-                        style: TextStyle(color: Layout.terminalStdInput),
+                        style: TextStyle(
+                          color: Layout.terminalStdInput,
+                          fontFamily: "RobotoMono",
+                          fontSize: 15,
+                        ),
                         children: [
                           TextSpan(
                             text: "acannie@homepage",
@@ -219,7 +223,11 @@ class Terminal extends StatelessWidget {
             Flexible(
               child: RichText(
                 text: TextSpan(
-                  style: TextStyle(color: Layout.terminalStdInput),
+                  style: TextStyle(
+                    color: Layout.terminalStdInput,
+                    fontFamily: "RobotoMono",
+                    fontSize: 15,
+                  ),
                   children: [
                     TextSpan(
                       text: "acannie@homepage",
@@ -241,7 +249,11 @@ class Terminal extends StatelessWidget {
             ),
             Flexible(
               child: TextFormField(
-                style: TextStyle(color: Layout.terminalStdInput),
+                style: TextStyle(
+                  color: Layout.terminalStdInput,
+                  fontFamily: "RobotoMono",
+                  fontSize: 15,
+                ),
                 enabled: true,
                 maxLength: 100,
                 keyboardType: TextInputType.number,

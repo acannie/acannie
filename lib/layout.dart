@@ -37,8 +37,8 @@ class Layout {
   static const Color terminalTabBarNonActiveLabel =
       Color.fromARGB(255, 151, 151, 151);
   static const Color terminalIconButton = Color.fromARGB(255, 197, 197, 197);
-  static const Color terminalCurrentPath = Color.fromARGB(255, 55, 131, 214);
-  static const Color terminalMachineName = Color.fromARGB(255, 34, 195, 130);
+  static const Color terminalCurrentPath = Color.fromARGB(255, 59, 142, 234);
+  static const Color terminalMachineName = Color.fromARGB(255, 35, 209, 139);
   static const Color terminalStdInput = Color.fromARGB(255, 204, 204, 204);
 
   static Text titleText(String title) {
