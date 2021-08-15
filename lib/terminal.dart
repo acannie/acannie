@@ -72,7 +72,21 @@ class TerminalController with ChangeNotifier {
         this._slashless(this._toFullPath(this._currentDir));
   }
 
-  void _runHelp(List<String> commandArgs) {}
+  // 操作ガイドを表示
+  void _runHelp(List<String> commandArgs) {
+    this._currentCommandLine.stdout = "";
+    this._currentCommandLine.stdout += "Welcome to CUI for Acannie HomePage!\n";
+    this._currentCommandLine.stdout += "Basic commands\n";
+    this._currentCommandLine.stdout += "\n";
+    // this._currentCommandLine.stdout += "\tcat [file] :open txt or md files.\n";
+    // this._currentCommandLine.stdout += "\tcd [dir] :change directory.\n";
+    // this._currentCommandLine.stdout += "\tdate :show date.\n";
+    // this._currentCommandLine.stdout += "\thistory :command history.\n";
+    // this._currentCommandLine.stdout += "\timgcat [img_file] :open png files.\n";
+    // this._currentCommandLine.stdout += "\tls [-a] :list segments.\n";
+    // this._currentCommandLine.stdout += "\topen [link_file] :open links.\n";
+    // this._currentCommandLine.stdout += "\tshare [ -fb | -tw ] :share this page on SNS.\n";
+  }
 
   // 想定外のコマンドが入力されたときの処理
   void _runCommandNotFound() {
