@@ -48,7 +48,7 @@ class TerminalController with ChangeNotifier {
   void _interpretCommand() {
     List<String> commandArgs = this._currentCommandLine.stdin.split(" ");
     final Map<String, Function> commandFunctions = {
-      "ls": this._runLs,
+      // "ls": this._runLs,
       "pwd": this._runPwd,
       "help": this._runHelp,
       "date": this._runHelp,
@@ -83,15 +83,18 @@ class TerminalController with ChangeNotifier {
     this._currentCommandLine.stdout += "Welcome to CUI for Acannie HomePage!\n";
     this._currentCommandLine.stdout += "Basic commands\n";
     this._currentCommandLine.stdout += "\n";
-    // this._currentCommandLine.stdout += "\tcat [file]\t\t\t:open txt or md files.\n";
-    // this._currentCommandLine.stdout += "\tcd [dir]\t\t\t:change directory.\n";
-    this._currentCommandLine.stdout += "\tdate\t\t\t:show date.\n";
-    this._currentCommandLine.stdout += "\thistory\t\t\t:command history.\n";
-    // this._currentCommandLine.stdout += "\timgcat [img_file]\t\t\t:open png files.\n";
-    // this._currentCommandLine.stdout += "\tls [-a]\t\t\t:list segments.\n";
-    // this._currentCommandLine.stdout += "\topen [link_file]\t\t\t:open links.\n";
+    // this._currentCommandLine.stdout += "\tcat [file]".padRight(21, " ") + ":open txt or md files.\n";
+    // this._currentCommandLine.stdout += "\tcd [dir]".padRight(21, " ") + ":change directory.\n";
     this._currentCommandLine.stdout +=
-        "\tshare [ -fb | -tw ]\t\t\t:share this page on SNS.\n";
+        "\tdate".padRight(21, " ") + ":show date.\n";
+    this._currentCommandLine.stdout +=
+        "\thistory".padRight(21, " ") + ":command history.\n";
+    // this._currentCommandLine.stdout += "\timgcat [img_file]".padRight(21, " ") + ":open png files.\n";
+    // this._currentCommandLine.stdout += "\tls [-a]".padRight(21, " ") + ":list segments.\n";
+    // this._currentCommandLine.stdout += "\topen [link_file]".padRight(21, " ") + ":open links.\n";
+    this._currentCommandLine.stdout +=
+        "\tshare [ -fb | -tw ]".padRight(21, " ") +
+            ":share this page on SNS.\n";
   }
 
   // 現在のタイムスタンプを表示
