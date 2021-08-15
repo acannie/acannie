@@ -46,7 +46,8 @@ class TerminalController with ChangeNotifier {
 
   // コマンドを解釈
   void _interpretCommand() {
-    List<String> commandArgs = this._currentCommandLine.stdin.split(" ");
+    List<String> commandArgs =
+        this._currentCommandLine.stdin.trim().split(RegExp(r"\s+"));
     final Map<String, Function> commandFunctions = {
       // "ls": this._runLs,
       "pwd": this._runPwd,
@@ -57,12 +58,13 @@ class TerminalController with ChangeNotifier {
     };
 
     // 入力なしまたはスペースのみの場合
-    if (commandArgs.length == 0) {
+    if (commandArgs.isEmpty ||
+        (commandArgs.length == 1 && commandArgs[0].isEmpty)) {
       return;
     }
     // コマンドが存在しないとき
     if (!commandFunctions.containsKey(commandArgs[0])) {
-      this._runCommandNotFound();
+      this._runCommandNotFound(commandArgs[0]);
       return;
     }
 
@@ -115,6 +117,11 @@ class TerminalController with ChangeNotifier {
     this._currentCommandLine.stdout = "";
     int count = 0;
     for (CommandLine commandLine in this._commandLines) {
+      // コマンドの中身が空またはスペースのみの場合は履歴に含めない
+      if (commandLine.stdin.isEmpty ||
+          !RegExp(r"\S+").hasMatch(commandLine.stdin)) {
+        continue;
+      }
       this._currentCommandLine.stdout += "\t";
       this._currentCommandLine.stdout += count.toString().padLeft(5, ' ');
       this._currentCommandLine.stdout += " ";
@@ -123,6 +130,10 @@ class TerminalController with ChangeNotifier {
       count++;
     }
 
+    if (this._currentCommandLine.stdin.isEmpty ||
+        !RegExp(r"\S+").hasMatch(this._currentCommandLine.stdin)) {
+      return;
+    }
     // 入力したばかりの help コマンドも標準出力
     this._currentCommandLine.stdout += "\t";
     this._currentCommandLine.stdout += count.toString().padLeft(5, ' ');
@@ -157,15 +168,16 @@ class TerminalController with ChangeNotifier {
   }
 
   // 想定外のコマンドが入力されたときの処理
-  void _runCommandNotFound() {
+  void _runCommandNotFound(String mainCommand) {
     this._currentCommandLine.stdout = "";
-    this._currentCommandLine.stdout += this._currentCommandLine.stdin;
+    this._currentCommandLine.stdout += mainCommand;
     this._currentCommandLine.stdout +=
         ": Command not found.  Use 'help' to see the command list.\n";
   }
 
   // コマンドを終了し、新たなコマンドラインを追加
   void _addCommandLine() {
+    final String stdin = this._currentCommandLine.stdin;
     this._deleteNewLine();
     this._commandLines.add(this._currentCommandLine);
     this._currentCommandLine = CommandLine(
