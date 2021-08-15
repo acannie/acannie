@@ -46,30 +46,25 @@ class TerminalController with ChangeNotifier {
   // コマンドを解釈
   void _interpretCommand() {
     List<String> commandArgs = this._currentCommandLine.stdin.split(" ");
+    final Map<String, Function> commandFunctions = {
+      "ls": this._runLs,
+      "pwd": this._runPwd,
+      "help": this._runHelp,
+      "date": this._runHelp,
+      "history": this._runHistory,
+    };
+
+    // 入力なしまたはスペースのみの場合
     if (commandArgs.length == 0) {
       return;
     }
-    if (commandArgs[0] == "ls") {
-      this._runLs(commandArgs);
+    // コマンドが存在しないとき
+    if (!commandFunctions.containsKey(commandArgs[0])) {
+      this._runCommandNotFound();
       return;
     }
-    if (commandArgs[0] == "pwd") {
-      this._runPwd(commandArgs);
-      return;
-    }
-    if (commandArgs[0] == "help") {
-      this._runHelp(commandArgs);
-      return;
-    }
-    if (commandArgs[0] == "date") {
-      this._runDate(commandArgs);
-      return;
-    }
-    if (commandArgs[0] == "history") {
-      this._runHistory(commandArgs);
-      return;
-    }
-    this._runCommandNotFound();
+
+    commandFunctions[commandArgs[0]]!(commandArgs);
   }
 
   void _runLs(List<String> commandArgs) {}
