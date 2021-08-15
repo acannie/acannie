@@ -168,6 +168,13 @@ class Terminal extends StatelessWidget {
         Provider.of<TerminalController>(context);
     final TextEditingController _textController = TextEditingController();
 
+    // Terminal のフォント共通スタイル
+    const TextStyle _terminalTextStyle = TextStyle(
+      color: Layout.terminalStdInput,
+      fontFamily: "RobotoMono",
+      fontSize: 15,
+    );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -182,11 +189,7 @@ class Terminal extends StatelessWidget {
                   Flexible(
                     child: RichText(
                       text: TextSpan(
-                        style: TextStyle(
-                          color: Layout.terminalStdInput,
-                          fontFamily: "RobotoMono",
-                          fontSize: 15,
-                        ),
+                        style: _terminalTextStyle,
                         children: [
                           TextSpan(
                             text: "acannie@homepage",
@@ -213,7 +216,7 @@ class Terminal extends StatelessWidget {
               ),
               Text(
                 commandline.stdout,
-                style: TextStyle(color: Layout.terminalStdInput),
+                style: _terminalTextStyle,
               ),
             ],
           ),
@@ -223,11 +226,7 @@ class Terminal extends StatelessWidget {
             Flexible(
               child: RichText(
                 text: TextSpan(
-                  style: TextStyle(
-                    color: Layout.terminalStdInput,
-                    fontFamily: "RobotoMono",
-                    fontSize: 15,
-                  ),
+                  style: _terminalTextStyle,
                   children: [
                     TextSpan(
                       text: "acannie@homepage",
@@ -249,17 +248,10 @@ class Terminal extends StatelessWidget {
             ),
             Flexible(
               child: TextFormField(
-                style: TextStyle(
-                  color: Layout.terminalStdInput,
-                  fontFamily: "RobotoMono",
-                  fontSize: 15,
-                ),
+                style: _terminalTextStyle,
                 enabled: true,
-                maxLength: 100,
-                keyboardType: TextInputType.number,
                 maxLines: 1,
                 inputFormatters: [],
-                enableSuggestions: true,
                 controller: _textController,
                 onFieldSubmitted: (command) {
                   _terminalController.confirmStdIn(command);
