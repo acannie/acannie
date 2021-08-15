@@ -6,12 +6,12 @@ import 'layout.dart';
 import 'controller.dart';
 
 // Terminal の 1 コマンド
-class TerminalIO {
+class CommandLine {
   String currentDir;
   String stdin;
   String stdout;
 
-  TerminalIO(
+  CommandLine(
       {required this.currentDir, required this.stdin, required this.stdout});
 }
 
@@ -27,24 +27,13 @@ class TerminalController with ChangeNotifier {
   // *********************************
 
   // 過去のコマンド
-  List<TerminalIO> get terminalIOs => _terminalIOs;
-  List<TerminalIO> _terminalIOs = [
-    TerminalIO(
-      currentDir: "~/acannie/homepage",
-      stdin: "ls -la > test.txt",
-      stdout: "Introduce\nContact\nWorks\nEngineering\nFavorite\n",
-    ),
-    TerminalIO(
-      currentDir: "~/acannie/homepage",
-      stdin: "cd",
-      stdout: "\n",
-    ),
-  ];
+  List<CommandLine> get commandLines => _commandLines;
+  List<CommandLine> _commandLines = [];
 
   // 現在のコマンド
-  TerminalIO get currentTerminalIO => _currentTerminalIO;
-  TerminalIO _currentTerminalIO =
-      TerminalIO(currentDir: "~", stdin: "", stdout: "");
+  CommandLine get currentCommandLine => _currentCommandLine;
+  CommandLine _currentCommandLine =
+      CommandLine(currentDir: "~", stdin: "", stdout: "");
 
   // 現在のパス
   String get currentDir => _currentDir;
@@ -56,7 +45,7 @@ class TerminalController with ChangeNotifier {
 
   // コマンドを解釈
   void _interpretCommand() {
-    List<String> commandArgs = this._currentTerminalIO.stdin.split(" ");
+    List<String> commandArgs = this._currentCommandLine.stdin.split(" ");
     if (commandArgs.length == 0) {
       return;
     }
@@ -79,7 +68,7 @@ class TerminalController with ChangeNotifier {
 
   // カレントディレクトリのパスを標準出力
   void _runPwd(List<String> commandArgs) {
-    this._currentTerminalIO.stdout =
+    this._currentCommandLine.stdout =
         this._Slashless(this._toFullPath(this._currentDir));
   }
 
@@ -87,16 +76,16 @@ class TerminalController with ChangeNotifier {
 
   // 想定外のコマンドが入力されたときの処理
   void _runCommandNotFound() {
-    this._currentTerminalIO.stdout = "";
-    this._currentTerminalIO.stdout += this._currentTerminalIO.stdin;
-    this._currentTerminalIO.stdout +=
+    this._currentCommandLine.stdout = "";
+    this._currentCommandLine.stdout += this._currentCommandLine.stdin;
+    this._currentCommandLine.stdout +=
         ": Command not found.  Use 'help' to see the command list.\n";
   }
 
   // コマンドを終了し、新たなコマンドラインを追加
-  void _addNewTerminalIO() {
-    this._terminalIOs.add(this._currentTerminalIO);
-    this._currentTerminalIO = TerminalIO(
+  void _addCommandLine() {
+    this._commandLines.add(this._currentCommandLine);
+    this._currentCommandLine = CommandLine(
       currentDir: this._Slashless(this._toShortPath(this._currentDir)),
       stdin: "",
       stdout: "",
@@ -153,9 +142,9 @@ class TerminalController with ChangeNotifier {
 
   // 入力を確定したときの処理
   void confirmStdIn(String command) {
-    this._currentTerminalIO.stdin = command;
+    this._currentCommandLine.stdin = command;
     this._interpretCommand();
-    this._addNewTerminalIO();
+    this._addCommandLine();
     notifyListeners();
   }
 }
@@ -173,7 +162,7 @@ class Terminal extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // 過去の入力
-        for (TerminalIO terminalIO in _terminalController.terminalIOs)
+        for (CommandLine commandline in _terminalController.commandLines)
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,14 +182,14 @@ class Terminal extends StatelessWidget {
                             text: ":",
                           ),
                           TextSpan(
-                            text: terminalIO.currentDir,
+                            text: commandline.currentDir,
                             style: TextStyle(color: Layout.terminalCurrentPath),
                           ),
                           TextSpan(
                             text: "\$ ",
                           ),
                           TextSpan(
-                            text: terminalIO.stdin,
+                            text: commandline.stdin,
                           ),
                         ],
                       ),
@@ -209,7 +198,7 @@ class Terminal extends StatelessWidget {
                 ],
               ),
               Text(
-                terminalIO.stdout,
+                commandline.stdout,
                 style: TextStyle(color: Layout.terminalStdInput),
               ),
             ],
@@ -230,7 +219,7 @@ class Terminal extends StatelessWidget {
                       text: ":",
                     ),
                     TextSpan(
-                      text: _terminalController.currentTerminalIO.currentDir,
+                      text: _terminalController.currentCommandLine.currentDir,
                       style: TextStyle(color: Layout.terminalCurrentPath),
                     ),
                     TextSpan(
