@@ -330,18 +330,26 @@ class Terminal extends StatelessWidget {
               ),
             ),
             Flexible(
-              child: TextFormField(
-                style: _terminalTextStyle,
-                enabled: true,
-                maxLines: 1,
-                inputFormatters: [],
-                controller: _textController,
-                focusNode: _myFocusNode,
-                onFieldSubmitted: (command) {
-                  _terminalController.confirmStdIn(command);
-                  _textController.clear();
-                  _myFocusNode.requestFocus();
-                },
+              child: SizedBox(
+                height: 15,
+                child: TextFormField(
+                  cursorColor: Layout.terminalStdInput,
+                  cursorWidth: 7,
+                  style: _terminalTextStyle,
+                  enabled: true,
+                  maxLines: 1,
+                  inputFormatters: [],
+                  controller: _textController,
+                  focusNode: _myFocusNode,
+                  onFieldSubmitted: (command) {
+                    _terminalController.confirmStdIn(command);
+                    _textController.clear();
+                    _myFocusNode.requestFocus();
+                  },
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                  ),
+                ),
               ),
             ),
           ],
