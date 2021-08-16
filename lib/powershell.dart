@@ -2,19 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'layout.dart';
-import 'terminal_controller.dart';
+import 'powershell_controller.dart';
 
-class Terminal extends StatelessWidget {
+class PowerShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final TerminalController _terminalController =
-        Provider.of<TerminalController>(context);
+    final PowerShellController _powerShellController =
+        Provider.of<PowerShellController>(context);
     final TextEditingController _textController = TextEditingController();
     FocusNode _myFocusNode = FocusNode();
 
     // Terminal のフォント共通スタイル
-    const TextStyle _terminalTextStyle = TextStyle(
+    const TextStyle _powerShellTextStyle = TextStyle(
       color: Layout.terminalStdInput,
+      fontFamily: "RobotoMono",
+      fontSize: 15,
+    );
+
+    const TextStyle _powerShellStdinTextStyle = TextStyle(
+      color: Color.fromARGB(255, 245, 245, 67),
       fontFamily: "RobotoMono",
       fontSize: 15,
     );
@@ -23,7 +29,7 @@ class Terminal extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // 過去の入力
-        for (CommandLine commandline in _terminalController.commandLines)
+        for (CommandLine commandline in _powerShellController.commandLines)
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +39,7 @@ class Terminal extends StatelessWidget {
                   Flexible(
                     child: RichText(
                       text: TextSpan(
-                        style: _terminalTextStyle,
+                        style: _powerShellTextStyle,
                         children: [
                           TextSpan(
                             text: "acannie@homepage",
@@ -60,7 +66,7 @@ class Terminal extends StatelessWidget {
               ),
               Text(
                 commandline.stdout,
-                style: _terminalTextStyle,
+                style: _powerShellTextStyle,
               ),
             ],
           ),
@@ -70,7 +76,7 @@ class Terminal extends StatelessWidget {
             Flexible(
               child: RichText(
                 text: TextSpan(
-                  style: _terminalTextStyle,
+                  style: _powerShellTextStyle,
                   children: [
                     TextSpan(
                       text: "acannie@homepage",
@@ -80,7 +86,7 @@ class Terminal extends StatelessWidget {
                       text: ":",
                     ),
                     TextSpan(
-                      text: _terminalController.currentCommandLine.currentDir,
+                      text: _powerShellController.currentCommandLine.currentDir,
                       style: TextStyle(color: Layout.terminalCurrentPath),
                     ),
                     TextSpan(
@@ -96,14 +102,14 @@ class Terminal extends StatelessWidget {
                 child: TextFormField(
                   cursorColor: Layout.terminalStdInput,
                   cursorWidth: 7,
-                  style: _terminalTextStyle,
+                  style: _powerShellStdinTextStyle,
                   enabled: true,
                   maxLines: 1,
                   inputFormatters: [],
                   controller: _textController,
                   focusNode: _myFocusNode,
                   onFieldSubmitted: (command) {
-                    _terminalController.confirmStdIn(command);
+                    _powerShellController.confirmStdIn(command);
                     _textController.clear();
                     _myFocusNode.requestFocus();
                   },

@@ -7,7 +7,7 @@ import 'works.dart';
 import 'engineering.dart';
 import 'favorite.dart';
 import 'layout.dart';
-import 'terminal.dart';
+import 'ubuntu.dart';
 
 // Page
 class PageContent {
@@ -91,7 +91,7 @@ class AcannieController with ChangeNotifier {
   List<TerminalContent> terminalContents = [
     TerminalContent(
       title: "TERMINAL",
-      content: Terminal(),
+      content: Ubuntu(),
     ),
     TerminalContent(
       title: "DEBUG CONSOLE",

@@ -12,12 +12,12 @@ class CommandLine {
       {required this.currentDir, required this.stdin, required this.stdout});
 }
 
-// Terminal の Controller
-class TerminalController with ChangeNotifier {
+// Ubuntu の Controller
+class UbuntuController with ChangeNotifier {
   // *********************************
   // * コンストラクタ                 *
   // *********************************
-  TerminalController() {}
+  UbuntuController() {}
 
   // *********************************
   // * 変数                          *

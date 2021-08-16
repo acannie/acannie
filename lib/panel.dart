@@ -3,15 +3,15 @@ import 'package:provider/provider.dart';
 
 import 'layout.dart';
 import 'controller.dart';
-import 'terminal_controller.dart';
+import 'ubuntu_controller.dart';
 
 class Panel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AcannieController _controller =
         Provider.of<AcannieController>(context);
-    final TerminalController _terminalController =
-        Provider.of<TerminalController>(context);
+    final UbuntuController _terminalController =
+        Provider.of<UbuntuController>(context);
 
     return DefaultTabController(
       length: _controller.terminalContents.length,
