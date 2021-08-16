@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/services.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import 'layout.dart';
 import 'controller.dart';
@@ -195,8 +193,6 @@ class TerminalController with ChangeNotifier {
 class Terminal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final AcannieController _controller =
-        Provider.of<AcannieController>(context);
     final TerminalController _terminalController =
         Provider.of<TerminalController>(context);
     final TextEditingController _textController = TextEditingController();
