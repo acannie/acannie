@@ -1,4 +1,5 @@
 import 'package:acannie/powershell.dart';
+import 'package:acannie/powershell_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -6,14 +7,17 @@ import 'layout.dart';
 import 'controller.dart';
 import 'ubuntu.dart';
 import 'ubuntu_controller.dart';
+import 'powershell_controller.dart';
 
 class Panel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AcannieController _controller =
         Provider.of<AcannieController>(context);
-    final UbuntuController _terminalController =
+    final UbuntuController _ubuntuController =
         Provider.of<UbuntuController>(context);
+    final PowerShellController _powerShellController =
+        Provider.of<PowerShellController>(context);
 
     List<TerminalContent> terminalContents = [
       TerminalContent(
@@ -159,7 +163,14 @@ class Panel extends StatelessWidget {
                               size: 20,
                             ),
                             onTap: () {
-                              _terminalController.deleteCommandLines();
+                              if (_controller.wslMode) {
+                                _ubuntuController.deleteCommandLines();
+                              } else {
+                                _powerShellController.deleteCommandLines();
+                              }
+                              if (_controller.panelFullScreenMode) {
+                                _controller.switchPanelFullScreenMode();
+                              }
                               _controller.switchTerminalActivity();
                             },
                           ),
@@ -191,6 +202,9 @@ class Panel extends StatelessWidget {
                             ),
                             onTap: () {
                               _controller.switchTerminalActivity();
+                              if (_controller.panelFullScreenMode) {
+                                _controller.switchPanelFullScreenMode();
+                              }
                             },
                           ),
                         ],
