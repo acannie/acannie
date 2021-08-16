@@ -42,21 +42,17 @@ class PowerShell extends StatelessWidget {
                         style: _powerShellTextStyle,
                         children: [
                           TextSpan(
-                            text: "acannie@homepage",
-                            style: TextStyle(color: Layout.terminalMachineName),
-                          ),
-                          TextSpan(
-                            text: ":",
+                            text: "PS ",
                           ),
                           TextSpan(
                             text: commandline.currentDir,
-                            style: TextStyle(color: Layout.terminalCurrentPath),
                           ),
                           TextSpan(
-                            text: "\$ ",
+                            text: "> ",
                           ),
                           TextSpan(
                             text: commandline.stdin,
+                            style: _powerShellStdinTextStyle,
                           ),
                         ],
                       ),
@@ -79,18 +75,13 @@ class PowerShell extends StatelessWidget {
                   style: _powerShellTextStyle,
                   children: [
                     TextSpan(
-                      text: "acannie@homepage",
-                      style: TextStyle(color: Layout.terminalMachineName),
-                    ),
-                    TextSpan(
-                      text: ":",
+                      text: "PS ",
                     ),
                     TextSpan(
                       text: _powerShellController.currentCommandLine.currentDir,
-                      style: TextStyle(color: Layout.terminalCurrentPath),
                     ),
                     TextSpan(
-                      text: "\$ ",
+                      text: "> ",
                     ),
                   ],
                 ),

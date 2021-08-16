@@ -30,11 +30,11 @@ class PowerShellController with ChangeNotifier {
   // 現在のコマンド
   CommandLine get currentCommandLine => _currentCommandLine;
   CommandLine _currentCommandLine =
-      CommandLine(currentDir: "~", stdin: "", stdout: "");
+      CommandLine(currentDir: "C:\\Users\\acannie", stdin: "", stdout: "");
 
   // 現在のパス
   String get currentDir => _currentDir;
-  String _currentDir = "/home/acannie/";
+  String _currentDir = "C:\\Users\\acannie\\";
 
   // *********************************
   // * Private 関数                   *
@@ -72,7 +72,7 @@ class PowerShellController with ChangeNotifier {
   // カレントディレクトリのパスを標準出力
   void _runPwd(List<String> commandArgs) {
     this._currentCommandLine.stdout =
-        Utils.slashless(Utils.toFullPath(this._currentDir));
+        Utils.deleteUbSlash(Utils.toUbAbsolutePath(this._currentDir));
   }
 
   // 操作ガイドを表示
@@ -158,8 +158,10 @@ class PowerShellController with ChangeNotifier {
   void _runCommandNotFound(String mainCommand) {
     this._currentCommandLine.stdout = "";
     this._currentCommandLine.stdout += mainCommand;
+    this._currentCommandLine.stdout += " : 用語 \'";
+    this._currentCommandLine.stdout += mainCommand;
     this._currentCommandLine.stdout +=
-        ": Command not found.  Use 'help' to see the command list.\n";
+        "\' は、コマンドレット、関数、スクリプト ファイル、または操作可能なプログラムの名前として認識されません。名前が正しく記述されていることを確認し、パスが含まれている場合はそのパスが正しいことを確認してから、再試行してください。発生場所 行:1 文字:1\n";
   }
 
   // コマンドを終了し、新たなコマンドラインを追加
@@ -168,7 +170,7 @@ class PowerShellController with ChangeNotifier {
         Utils.deleteNewLine(this._currentCommandLine.stdout);
     this._commandLines.add(this._currentCommandLine);
     this._currentCommandLine = CommandLine(
-      currentDir: Utils.slashless(Utils.toShortPath(this._currentDir)),
+      currentDir: Utils.deleteUbSlash(Utils.toUbShortPath(this._currentDir)),
       stdin: "",
       stdout: "",
     );

@@ -72,7 +72,7 @@ class UbuntuController with ChangeNotifier {
   // カレントディレクトリのパスを標準出力
   void _runPwd(List<String> commandArgs) {
     this._currentCommandLine.stdout =
-        Utils.slashless(Utils.toFullPath(this._currentDir));
+        Utils.deleteUbSlash(Utils.toUbAbsolutePath(this._currentDir));
   }
 
   // 操作ガイドを表示
@@ -168,7 +168,7 @@ class UbuntuController with ChangeNotifier {
         Utils.deleteNewLine(this._currentCommandLine.stdout);
     this._commandLines.add(this._currentCommandLine);
     this._currentCommandLine = CommandLine(
-      currentDir: Utils.slashless(Utils.toShortPath(this._currentDir)),
+      currentDir: Utils.deleteUbSlash(Utils.toUbShortPath(this._currentDir)),
       stdin: "",
       stdout: "",
     );

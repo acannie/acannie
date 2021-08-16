@@ -23,33 +23,38 @@ class Utils {
     }
   }
 
-  static String _shortHomeDirPath = "~/";
-  static String _fullHomeDirPath = "/home/acannie/";
+  static String _ubShortHomeDirPath = "~/";
+  static String _ubAbsoluteHomeDirPath = "/home/acannie/";
+  static String _psAbsoluteHomeDirPath = "C:\\Users\\acannie\\";
 
-  // 短縮パスをフルパスに変換
-  static String toFullPath(String shortPath) {
-    if (shortPath.length < _shortHomeDirPath.length) {
+  // 【Ubuntu】短縮パスをフルパスに変換
+  static String toUbAbsolutePath(String shortPath) {
+    if (shortPath.length < _ubShortHomeDirPath.length) {
       return shortPath;
     }
-    if (shortPath.substring(0, _shortHomeDirPath.length) != _shortHomeDirPath) {
+    if (shortPath.substring(0, _ubShortHomeDirPath.length) !=
+        _ubShortHomeDirPath) {
       return shortPath;
     }
-    return _fullHomeDirPath + shortPath.substring(_shortHomeDirPath.length);
+    return _ubAbsoluteHomeDirPath +
+        shortPath.substring(_ubShortHomeDirPath.length);
   }
 
-  // フルパスを短縮パスに変換
-  static String toShortPath(String fullPath) {
-    if (fullPath.length < _fullHomeDirPath.length) {
+  // 【Ubuntu】フルパスを短縮パスに変換
+  static String toUbShortPath(String fullPath) {
+    if (fullPath.length < _ubAbsoluteHomeDirPath.length) {
       return fullPath;
     }
-    if (fullPath.substring(0, _fullHomeDirPath.length) != _fullHomeDirPath) {
+    if (fullPath.substring(0, _ubAbsoluteHomeDirPath.length) !=
+        _ubAbsoluteHomeDirPath) {
       return fullPath;
     }
-    return _shortHomeDirPath + fullPath.substring(_fullHomeDirPath.length);
+    return _ubShortHomeDirPath +
+        fullPath.substring(_ubAbsoluteHomeDirPath.length);
   }
 
-  // パスの末尾のスラッシュを除去
-  static String slashless(String path) {
+  // 【Ubuntu】パスの末尾のスラッシュを除去
+  static String deleteUbSlash(String path) {
     if (path.isEmpty || path.length == 1) {
       return path;
     }
@@ -59,8 +64,27 @@ class Utils {
     return path.substring(0, path.length - 1);
   }
 
-  // パスの末尾にスラッシュを追加
-  static String addSlash(String path) {
+  // 【Ubuntu】パスの末尾にスラッシュを追加
+  static String addUbSlash(String path) {
+    if (path.endsWith("/")) {
+      return path;
+    }
+    return path + "/";
+  }
+
+  // 【PowerShell】パスの末尾のスラッシュを除去
+  static String deletePsSlash(String path) {
+    if (path.isEmpty || path.length == 1) {
+      return path;
+    }
+    if (!path.endsWith("\\")) {
+      return path;
+    }
+    return path.substring(0, path.length - 1);
+  }
+
+  // 【PowerShell】パスの末尾にスラッシュを追加
+  static String addPsSlash(String path) {
     if (path.endsWith("/")) {
       return path;
     }
