@@ -116,7 +116,10 @@ class PowerShellController with ChangeNotifier {
 
   // コマンドの履歴を標準出力
   void _runHistory(List<String> commandArgs) {
-    this._currentCommandLine.stdout = "";
+    this._currentCommandLine.stdout = "\n";
+    this._currentCommandLine.stdout += "  Id CommandLine\n";
+    this._currentCommandLine.stdout += "  -- -----------\n";
+
     int count = 0;
     for (CommandLine commandLine in this._commandLines) {
       // コマンドの中身が空またはスペースのみの場合は履歴に含めない
@@ -124,24 +127,12 @@ class PowerShellController with ChangeNotifier {
           !RegExp(r"\S+").hasMatch(commandLine.stdin)) {
         continue;
       }
-      this._currentCommandLine.stdout += "\t";
-      this._currentCommandLine.stdout += count.toString().padLeft(5, ' ');
+      this._currentCommandLine.stdout += (count + 1).toString().padLeft(4, ' ');
       this._currentCommandLine.stdout += " ";
       this._currentCommandLine.stdout += commandLine.stdin;
       this._currentCommandLine.stdout += "\n";
       count++;
     }
-
-    if (this._currentCommandLine.stdin.isEmpty ||
-        !RegExp(r"\S+").hasMatch(this._currentCommandLine.stdin)) {
-      return;
-    }
-    // 入力したばかりの help コマンドも標準出力
-    this._currentCommandLine.stdout += "\t";
-    this._currentCommandLine.stdout += count.toString().padLeft(5, ' ');
-    this._currentCommandLine.stdout += " ";
-    this._currentCommandLine.stdout += this._currentCommandLine.stdin;
-    this._currentCommandLine.stdout += "\n";
   }
 
   // ページを SNS でシェア
