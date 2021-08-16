@@ -166,10 +166,12 @@ class Panel extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 3),
                           ),
-                          // maximize panel size
+                          // maximize or minimize panel size
                           InkWell(
                             child: Icon(
-                              Icons.keyboard_arrow_up,
+                              _controller.panelFullScreenMode
+                                  ? Icons.keyboard_arrow_down
+                                  : Icons.keyboard_arrow_up,
                               color: Layout.terminalIconButton,
                               size: 20,
                             ),
