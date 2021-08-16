@@ -146,7 +146,9 @@ class Panel extends StatelessWidget {
                               color: Layout.terminalIconButton,
                               size: 20,
                             ),
-                            onTap: () {},
+                            onTap: () {
+                              _controller.switchPanelFullScreenMode();
+                            },
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 3),

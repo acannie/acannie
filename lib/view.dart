@@ -108,82 +108,91 @@ class MyHomePage extends StatelessWidget {
                         child: Column(
                           children: [
                             // ページのタブ
-                            Container(
-                              height: 40,
-                              child: Ink(
-                                color: Layout.tabBarBg,
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Ink(
-                                    color: Layout.tabBarNonActiveBg,
-                                    child: TabBar(
-                                      labelPadding: EdgeInsets.zero,
-                                      indicatorPadding: EdgeInsets.zero,
-                                      indicatorSize: TabBarIndicatorSize.label,
-                                      indicator: BoxDecoration(
-                                          color: Layout.tabBarActiveBg),
-                                      labelColor: Layout.tabBarActiveLabel,
-                                      unselectedLabelColor:
-                                          Layout.tabBarNonActiveLabel,
-                                      controller: tabController,
-                                      isScrollable: true,
-                                      tabs: [
-                                        for (PageContent pageContent
-                                            in _controller.pageContents)
-                                          Tab(
-                                            icon: Container(
-                                              decoration: BoxDecoration(
-                                                border: Border(
-                                                  right: BorderSide(
-                                                      color: Layout.tabBarBg),
+                            Visibility(
+                              visible: !_controller.panelFullScreenMode,
+                              child: Container(
+                                height: 40,
+                                child: Ink(
+                                  color: Layout.tabBarBg,
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Ink(
+                                      color: Layout.tabBarNonActiveBg,
+                                      child: TabBar(
+                                        labelPadding: EdgeInsets.zero,
+                                        indicatorPadding: EdgeInsets.zero,
+                                        indicatorSize:
+                                            TabBarIndicatorSize.label,
+                                        indicator: BoxDecoration(
+                                            color: Layout.tabBarActiveBg),
+                                        labelColor: Layout.tabBarActiveLabel,
+                                        unselectedLabelColor:
+                                            Layout.tabBarNonActiveLabel,
+                                        controller: tabController,
+                                        isScrollable: true,
+                                        tabs: [
+                                          for (PageContent pageContent
+                                              in _controller.pageContents)
+                                            Tab(
+                                              icon: Container(
+                                                decoration: BoxDecoration(
+                                                  border: Border(
+                                                    right: BorderSide(
+                                                        color: Layout.tabBarBg),
+                                                  ),
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsets.all(7),
+                                                    ),
+                                                    Icon(
+                                                      pageContent.iconData,
+                                                      color:
+                                                          pageContent.iconColor,
+                                                      size: 15,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 3),
+                                                    ),
+                                                    Text(
+                                                      pageContent.title,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsets.all(25),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                              child: Row(
-                                                children: [
-                                                  Padding(
-                                                    padding: EdgeInsets.all(7),
-                                                  ),
-                                                  Icon(
-                                                    pageContent.iconData,
-                                                    color:
-                                                        pageContent.iconColor,
-                                                    size: 15,
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 3),
-                                                  ),
-                                                  Text(
-                                                    pageContent.title,
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsets.all(25),
-                                                  ),
-                                                ],
-                                              ),
                                             ),
-                                          ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
                             // ページ本体
-                            Expanded(
-                              flex: 2,
-                              child: TabBarView(
-                                controller: tabController,
-                                children: <Widget>[
-                                  for (PageContent pageContent
-                                      in _controller.pageContents)
-                                    Container(
-                                      child:
-                                          ContentView(pageContent: pageContent),
-                                      color: Layout.tabBarActiveBg,
-                                    ),
-                                ],
+                            Visibility(
+                              visible: !_controller.panelFullScreenMode,
+                              child: Expanded(
+                                flex: 2,
+                                child: TabBarView(
+                                  controller: tabController,
+                                  children: <Widget>[
+                                    for (PageContent pageContent
+                                        in _controller.pageContents)
+                                      Container(
+                                        child: ContentView(
+                                            pageContent: pageContent),
+                                        color: Layout.tabBarActiveBg,
+                                      ),
+                                  ],
+                                ),
                               ),
                             ),
                             // Panel 部
