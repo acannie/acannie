@@ -127,6 +127,10 @@ class AcannieController with ChangeNotifier {
   bool get terminalActive => _terminalActive;
   bool _terminalActive = false;
 
+  // Panel がフルスクリーンモードか
+  bool get panelFullScreenMode => _panelFullScreenMode;
+  bool _panelFullScreenMode = false;
+
   // WSL モードか否（PowerShellモード）か
   bool get wslMode => _wslMode;
   bool _wslMode = true;
@@ -158,6 +162,12 @@ class AcannieController with ChangeNotifier {
 
   void switchTerminalActivity() {
     _terminalActive = !_terminalActive;
+    notifyListeners();
+  }
+
+  // パネルのフルスクリーンモードを切り替える
+  void switchPanelFullScreenMode() {
+    _panelFullScreenMode = !_panelFullScreenMode;
     notifyListeners();
   }
 

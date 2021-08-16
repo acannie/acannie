@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'view.dart';
 import 'controller.dart';
 import 'file_list.dart';
-import 'terminal.dart';
+import 'terminal_controller.dart';
 
 void main() {
   runApp(MyApp());
