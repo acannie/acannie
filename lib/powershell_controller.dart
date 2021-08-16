@@ -111,7 +111,17 @@ class PowerShellController with ChangeNotifier {
   // 現在のタイムスタンプを表示
   void _runDate(List<String> commandArgs) {
     final DateTime now = DateTime.now();
-    this._currentCommandLine.stdout = now.toString();
+    this._currentCommandLine.stdout = "\n";
+    this._currentCommandLine.stdout += now.year.toString() + "年";
+    this._currentCommandLine.stdout += now.month.toString() + "月";
+    this._currentCommandLine.stdout += now.day.toString() + "日";
+    this._currentCommandLine.stdout += " ";
+    this._currentCommandLine.stdout += now.hour.toString() + ":";
+    this._currentCommandLine.stdout +=
+        now.minute.toString().padLeft(2, "0") + ":";
+    this._currentCommandLine.stdout +=
+        now.second.toString().padLeft(2, "0") + "\n";
+    this._currentCommandLine.stdout += "\n";
   }
 
   // コマンドの履歴を標準出力
@@ -130,6 +140,7 @@ class PowerShellController with ChangeNotifier {
       this._currentCommandLine.stdout += (count + 1).toString().padLeft(4, ' ');
       this._currentCommandLine.stdout += " ";
       this._currentCommandLine.stdout += commandLine.stdin;
+      this._currentCommandLine.stdout += "\n";
       this._currentCommandLine.stdout += "\n";
       count++;
     }
