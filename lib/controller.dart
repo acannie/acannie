@@ -38,12 +38,18 @@ class TerminalContent {
 }
 
 class AcannieController with ChangeNotifier {
-  // コンストラクタ
+  // *********************************
+  // * コンストラクタ                 *
+  // *********************************
+
   AcannieController() {
     _selectedPageContents = pageContents;
   }
 
-  // 定数
+  // *********************************
+  // * 定数                          *
+  // *********************************
+
   List<PageContent> pageContents = [
     PageContent(
       iconData: Icons.sentiment_satisfied_outlined,
@@ -99,23 +105,40 @@ class AcannieController with ChangeNotifier {
         content: Text("Coming Soon!", style: TextStyle(color: Colors.white))),
   ];
 
-  // 変数
+  // *********************************
+  // * 変数                          *
+  // *********************************
+
   int get activePageIndex => _activePageIndex;
   int _activePageIndex = 0;
 
-  bool get leftListActive => _leftListActive; // 左側のリストが表示モードになっているか
+  // 左側のリストが表示モードになっているか
+  bool get leftListActive => _leftListActive;
   bool _leftListActive = true;
-  int get activeLeftBarIconIndex =>
-      _activeLeftBarIconIndex; // 左側のバーの中でアクティブになっているアイコンのindex
+
+  // 左側のバーの中でアクティブになっているアイコンのindex
+  int get activeLeftBarIconIndex => _activeLeftBarIconIndex;
   int _activeLeftBarIconIndex = 0;
 
   List<PageContent>? get selectedPageContents => _selectedPageContents;
   List<PageContent>? _selectedPageContents;
 
-  bool get terminalActive => _terminalActive; // Terminal が表示モードか
+  // Terminal が表示モードか
+  bool get terminalActive => _terminalActive;
   bool _terminalActive = false;
 
-  // 関数
+  // WSL モードか否（PowerShellモード）か
+  bool get wslMode => _wslMode;
+  bool _wslMode = true;
+
+  // *********************************
+  // * Private 関数                   *
+  // *********************************
+
+  // *********************************
+  // * Public 関数                   *
+  // *********************************
+
   void setActivePage(int pageIndex) {
     _activePageIndex = pageIndex;
     notifyListeners();
@@ -135,6 +158,12 @@ class AcannieController with ChangeNotifier {
 
   void switchTerminalActivity() {
     _terminalActive = !_terminalActive;
+    notifyListeners();
+  }
+
+  // WSL モードと PowerShell モードを切り替え
+  void switchWslMode() {
+    _wslMode = !_wslMode;
     notifyListeners();
   }
 }
