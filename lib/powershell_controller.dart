@@ -71,8 +71,14 @@ class PowerShellController with ChangeNotifier {
 
   // カレントディレクトリのパスを標準出力
   void _runPwd(List<String> commandArgs) {
-    this._currentCommandLine.stdout =
-        Utils.deleteUbSlash(Utils.toUbAbsolutePath(this._currentDir));
+    this._currentCommandLine.stdout = "";
+    this._currentCommandLine.stdout += "\n";
+    this._currentCommandLine.stdout += "Path\n";
+    this._currentCommandLine.stdout += "----\n";
+    this._currentCommandLine.stdout +=
+        Utils.deletePsSlash(Utils.toUbAbsolutePath(this._currentDir));
+    this._currentCommandLine.stdout += "\n";
+    this._currentCommandLine.stdout += "\n";
   }
 
   // 操作ガイドを表示
@@ -166,11 +172,10 @@ class PowerShellController with ChangeNotifier {
 
   // コマンドを終了し、新たなコマンドラインを追加
   void _addCommandLine() {
-    this._currentCommandLine.stdout =
-        Utils.deleteNewLine(this._currentCommandLine.stdout);
+    this._currentCommandLine.stdout = this._currentCommandLine.stdout;
     this._commandLines.add(this._currentCommandLine);
     this._currentCommandLine = CommandLine(
-      currentDir: Utils.deleteUbSlash(Utils.toUbShortPath(this._currentDir)),
+      currentDir: Utils.deletePsSlash(Utils.toUbShortPath(this._currentDir)),
       stdin: "",
       stdout: "",
     );
