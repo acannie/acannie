@@ -141,9 +141,9 @@ class PowerShellController with ChangeNotifier {
       this._currentCommandLine.stdout += " ";
       this._currentCommandLine.stdout += commandLine.stdin;
       this._currentCommandLine.stdout += "\n";
-      this._currentCommandLine.stdout += "\n";
       count++;
     }
+    this._currentCommandLine.stdout += "\n";
   }
 
   // ページを SNS でシェア
