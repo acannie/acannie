@@ -1,10 +1,12 @@
+import 'package:acannie/powershell_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'view.dart';
 import 'controller.dart';
 import 'file_list.dart';
-import 'terminal_controller.dart';
+import 'ubuntu_controller.dart';
+import 'powershell_controller.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,7 +27,8 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (context) => AcannieController()),
           ChangeNotifierProvider(create: (context) => DropDownListCotroller()),
-          ChangeNotifierProvider(create: (context) => TerminalController()),
+          ChangeNotifierProvider(create: (context) => UbuntuController()),
+          ChangeNotifierProvider(create: (context) => PowerShellController()),
         ],
       ),
     );
