@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 
 import 'layout.dart';
@@ -13,12 +12,11 @@ class BottomBar extends StatelessWidget {
 
     return BottomAppBar(
       child: Container(
-        height: 30.0,
+        height: 20.0,
         child: Row(
           children: [
             Container(
-              height: 30,
-              width: 200,
+              width: 140,
               alignment: Alignment.centerLeft,
               color: Layout.bottomBarRemoteBg,
               child: Text(
@@ -31,7 +29,6 @@ class BottomBar extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                height: 30,
                 alignment: Alignment.centerLeft,
                 color: Layout.bottomBarMainBg,
                 child: Text(
