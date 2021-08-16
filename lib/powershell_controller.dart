@@ -76,8 +76,7 @@ class PowerShellController with ChangeNotifier {
     this._currentCommandLine.stdout += "\n";
     this._currentCommandLine.stdout += "Path\n";
     this._currentCommandLine.stdout += "----\n";
-    this._currentCommandLine.stdout +=
-        Utils.deletePsSlash(Utils.toUbAbsolutePath(this._currentDir));
+    this._currentCommandLine.stdout += Utils.deletePsSlash(this._currentDir);
     this._currentCommandLine.stdout += "\n";
     this._currentCommandLine.stdout += "\n";
   }
@@ -185,7 +184,7 @@ class PowerShellController with ChangeNotifier {
     this._currentCommandLine.stdout = this._currentCommandLine.stdout;
     this._commandLines.add(this._currentCommandLine);
     this._currentCommandLine = CommandLine(
-      currentDir: Utils.deletePsSlash(Utils.toUbShortPath(this._currentDir)),
+      currentDir: Utils.deletePsSlash(this._currentDir),
       stdin: "",
       stdout: "",
     );
