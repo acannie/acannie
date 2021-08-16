@@ -10,7 +10,7 @@ class BottomBar extends StatelessWidget {
     final AcannieController _controller =
         Provider.of<AcannieController>(context);
 
-    TextStyle _bottomBarStyle = TextStyle(
+    const TextStyle _bottomBarStyle = TextStyle(
       color: Colors.white,
       fontSize: 13,
     );
@@ -58,70 +58,98 @@ class BottomBar extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     // 左側のアイコン群
-                    Container(
-                      child: Row(
-                        children: [
-                          Padding(padding: EdgeInsets.symmetric(horizontal: 5)),
-                          Icon(
-                            Icons.share,
-                            color: Colors.white,
-                            size: 15,
-                          ),
-                          Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
-                          Text("feature/#123_acannie*", style: _bottomBarStyle),
-                          Icon(
-                            Icons.add,
-                            color: Colors.white,
-                            size: 10,
-                          ),
-                          Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
-                          Icon(
-                            Icons.cached,
-                            color: Colors.white,
-                            size: 15,
-                          ),
-                          Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
-                          Icon(
-                            Icons.highlight_off,
-                            color: Colors.white,
-                            size: 15,
-                          ),
-                          Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
-                          Text("0", style: _bottomBarStyle),
-                          Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
-                          Icon(
-                            Icons.warning_amber,
-                            color: Colors.white,
-                            size: 15,
-                          ),
-                          Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
-                          Text("0", style: _bottomBarStyle),
-                          Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
-                          Icon(
-                            Icons.info_outline,
-                            color: Colors.white,
-                            size: 15,
-                          ),
-                          Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
-                          Text("0", style: _bottomBarStyle),
-                          Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
-                          Icon(
-                            Icons.play_arrow_outlined,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                          Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
-                        ],
-                      ),
+                    Row(
+                      children: [
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 5)),
+                        Icon(
+                          Icons.share,
+                          color: Colors.white,
+                          size: 15,
+                        ),
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
+                        Text("feature/#123_acannie*", style: _bottomBarStyle),
+                        Icon(
+                          Icons.add,
+                          color: Colors.white,
+                          size: 10,
+                        ),
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
+                        Icon(
+                          Icons.cached,
+                          color: Colors.white,
+                          size: 15,
+                        ),
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
+                        Icon(
+                          Icons.highlight_off,
+                          color: Colors.white,
+                          size: 15,
+                        ),
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
+                        Text("0", style: _bottomBarStyle),
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
+                        Icon(
+                          Icons.warning_amber,
+                          color: Colors.white,
+                          size: 15,
+                        ),
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
+                        Text("0", style: _bottomBarStyle),
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
+                        Icon(
+                          Icons.info_outline,
+                          color: Colors.white,
+                          size: 15,
+                        ),
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
+                        Text("0", style: _bottomBarStyle),
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
+                        Icon(
+                          Icons.play_arrow_outlined,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                      ],
                     ),
                     // 右側のアイコン群
-                    Container(
-                      child: Row(
-                        children: [
-                          Text("aaa"),
-                          Text("bbb"),
-                        ],
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          "Ln 123, Col 456    Space: 2    UTF-8    Dart    Dart DevTools",
+                          style: _bottomBarStyle,
+                        ),
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
+                        Icon(
+                          Icons.settings_input_antenna,
+                          color: Colors.white,
+                          size: 15,
+                        ),
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
+                        Text("Go Live", style: _bottomBarStyle),
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
+                        Text(
+                          "Flutter: 2.5.0-7.0.pre.80",
+                          style: _bottomBarStyle,
+                        ),
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
+                        Text(
+                          "Web Server (web-javascript)",
+                          style: _bottomBarStyle,
+                        ),
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
+                        Icon(
+                          Icons.person_remove_outlined,
+                          color: Colors.white,
+                          size: 15,
+                        ),
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
+                        Icon(
+                          Icons.notifications_none,
+                          color: Colors.white,
+                          size: 15,
+                        ),
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
+                      ],
                     ),
                   ],
                 ),
