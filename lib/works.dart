@@ -2,19 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'layout.dart';
+import 'utils.dart';
 
 // 作品紹介
 class Works extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    void _launchURL(String url) async {
-      if (await canLaunch(url)) {
-        await launch(url);
-      } else {
-        throw 'Could not launch $url';
-      }
-    }
-
     return Container(
       child: Column(
         children: [
@@ -32,7 +25,7 @@ class Works extends StatelessWidget {
               ],
             ),
             onTap: () =>
-                {_launchURL("https://acannie.github.io/ac_mydesigner/")},
+                {Utils.launchURL("https://acannie.github.io/ac_mydesigner/")},
           ),
           Layout.sentenceText("人気ゲーム「あつまれどうぶつの森」のマイデザイン作成補助サービスです。"),
           Layout.sentenceText("画像をマイデザインに変換します。"),
@@ -48,7 +41,7 @@ class Works extends StatelessWidget {
               ],
             ),
             onTap: () =>
-                {_launchURL("https://acannie.github.io/emoji_art_maker/")},
+                {Utils.launchURL("https://acannie.github.io/emoji_art_maker/")},
           ),
           Layout.sentenceText("画像を9色の絵文字"),
           Layout.sentenceText("🟥🟧🟨🟩🟦🟪🟫⬛⬜"),
@@ -64,7 +57,8 @@ class Works extends StatelessWidget {
                 Icon(Icons.launch, color: Layout.contentChar),
               ],
             ),
-            onTap: () => {_launchURL("https://acannie.github.io/johinkodice/")},
+            onTap: () =>
+                {Utils.launchURL("https://acannie.github.io/johinkodice/")},
           ),
           Layout.sentenceText("サイコロを投げて単語を揃えて楽しむという、"),
           Layout.sentenceText("非常に上品なゲームを楽しめるサービスです。"),

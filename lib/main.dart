@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'view.dart';
 import 'controller.dart';
 import 'file_list.dart';
+import 'terminal.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (context) => AcannieController()),
           ChangeNotifierProvider(create: (context) => DropDownListCotroller()),
+          ChangeNotifierProvider(create: (context) => TerminalController()),
         ],
       ),
     );

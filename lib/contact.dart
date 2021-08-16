@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'layout.dart';
+import 'utils.dart';
 
 class SnsInfo {
   final String imagePath;
@@ -36,14 +37,6 @@ class Contact extends StatelessWidget {
     ),
   ];
 
-  void _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     Widget snsWithLogo(String imagePath, String snsName) {
@@ -70,7 +63,7 @@ class Contact extends StatelessWidget {
             Column(
               children: [
                 InkWell(
-                  onTap: () => _launchURL(snsAccount.url),
+                  onTap: () => Utils.launchURL(snsAccount.url),
                   child: snsWithLogo(
                     snsAccount.imagePath,
                     snsAccount.name,
