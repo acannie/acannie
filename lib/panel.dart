@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 
 import 'layout.dart';
 import 'controller.dart';
+import 'terminal_controller.dart';
 
 class Panel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AcannieController _controller =
         Provider.of<AcannieController>(context);
+    final TerminalController _terminalController =
+        Provider.of<TerminalController>(context);
 
     return DefaultTabController(
       length: _controller.terminalContents.length,
@@ -133,6 +135,7 @@ class Panel extends StatelessWidget {
                               size: 20,
                             ),
                             onTap: () {
+                              _terminalController.deleteCommandLines();
                               _controller.switchTerminalActivity();
                             },
                           ),

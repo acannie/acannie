@@ -185,4 +185,10 @@ class TerminalController with ChangeNotifier {
     this._addCommandLine();
     notifyListeners();
   }
+
+  // コマンドラインを削除
+  void deleteCommandLines() {
+    _commandLines.clear();
+    notifyListeners();
+  }
 }
