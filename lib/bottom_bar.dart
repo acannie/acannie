@@ -10,6 +10,11 @@ class BottomBar extends StatelessWidget {
     final AcannieController _controller =
         Provider.of<AcannieController>(context);
 
+    TextStyle _bottomBarStyle = TextStyle(
+      color: Colors.white,
+      fontSize: 13,
+    );
+
     return BottomAppBar(
       child: Container(
         height: 22,
@@ -33,10 +38,7 @@ class BottomBar extends StatelessWidget {
                         visible: _controller.wslMode,
                         child: Text(
                           "WSL: Ubuntu-20.04",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
+                          style: _bottomBarStyle,
                         ),
                       ),
                       Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
@@ -50,11 +52,78 @@ class BottomBar extends StatelessWidget {
             // メインのバー
             Expanded(
               child: Container(
-                alignment: Alignment.centerLeft,
+                height: 22,
                 color: Layout.bottomBarMainBg,
-                child: Text(
-                  "feature/#1_acannie*",
-                  style: TextStyle(color: Colors.white),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // 左側のアイコン群
+                    Container(
+                      child: Row(
+                        children: [
+                          Padding(padding: EdgeInsets.symmetric(horizontal: 5)),
+                          Icon(
+                            Icons.share,
+                            color: Colors.white,
+                            size: 15,
+                          ),
+                          Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
+                          Text("feature/#123_acannie*", style: _bottomBarStyle),
+                          Icon(
+                            Icons.add,
+                            color: Colors.white,
+                            size: 10,
+                          ),
+                          Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
+                          Icon(
+                            Icons.cached,
+                            color: Colors.white,
+                            size: 15,
+                          ),
+                          Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
+                          Icon(
+                            Icons.highlight_off,
+                            color: Colors.white,
+                            size: 15,
+                          ),
+                          Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
+                          Text("0", style: _bottomBarStyle),
+                          Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
+                          Icon(
+                            Icons.warning_amber,
+                            color: Colors.white,
+                            size: 15,
+                          ),
+                          Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
+                          Text("0", style: _bottomBarStyle),
+                          Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
+                          Icon(
+                            Icons.info_outline,
+                            color: Colors.white,
+                            size: 15,
+                          ),
+                          Padding(padding: EdgeInsets.symmetric(horizontal: 1)),
+                          Text("0", style: _bottomBarStyle),
+                          Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
+                          Icon(
+                            Icons.play_arrow_outlined,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                          Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
+                        ],
+                      ),
+                    ),
+                    // 右側のアイコン群
+                    Container(
+                      child: Row(
+                        children: [
+                          Text("aaa"),
+                          Text("bbb"),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
