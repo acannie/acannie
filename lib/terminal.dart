@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'layout.dart';
 import 'controller.dart';
+import 'utils.dart';
 
 // Terminal の 1 コマンド
 class CommandLine {
@@ -76,7 +77,7 @@ class TerminalController with ChangeNotifier {
   // カレントディレクトリのパスを標準出力
   void _runPwd(List<String> commandArgs) {
     this._currentCommandLine.stdout =
-        this._slashless(this._toFullPath(this._currentDir));
+        Utils.slashless(Utils.toFullPath(this._currentDir));
   }
 
   // 操作ガイドを表示
@@ -142,15 +143,6 @@ class TerminalController with ChangeNotifier {
     this._currentCommandLine.stdout += "\n";
   }
 
-  // 新しいタブで URL のページを開く
-  void _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
   // ページを SNS でシェア
   void _runShare(List<String> commandArgs) {
     if ((commandArgs.length != 2) ||
@@ -159,10 +151,10 @@ class TerminalController with ChangeNotifier {
       return;
     }
     if (commandArgs[1] == "-fb") {
-      this._launchURL(
+      Utils.launchURL(
           "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Facannie.github.io%2Facannie%2F");
     } else if (commandArgs[1] == "-tw") {
-      this._launchURL(
+      Utils.launchURL(
           "https://twitter.com/intent/tweet?url=https://acannie.github.io/acannie/&text=%23Acannie%0D%0A%23%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%0D%0A%23%E8%87%AA%E5%B7%B1%E7%B4%B9%E4%BB%8B%0D%0A%2322%E5%8D%92%0D%0A%23VSCode%0D%0A+Acannie%E3%81%AEVSCode%E9%A2%A8%E8%87%AA%E5%B7%B1%E7%B4%B9%E4%BB%8B%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%A0%E3%82%88%EF%BC%81%E3%81%BF%E3%82%93%E3%81%AA%E3%82%88%E3%82%8D%E3%81%97%E3%81%8F%E3%81%AD%EF%BC%81%0D%0A");
     }
   }
@@ -177,67 +169,14 @@ class TerminalController with ChangeNotifier {
 
   // コマンドを終了し、新たなコマンドラインを追加
   void _addCommandLine() {
-    final String stdin = this._currentCommandLine.stdin;
-    this._deleteNewLine();
+    this._currentCommandLine.stdout =
+        Utils.deleteNewLine(this._currentCommandLine.stdout);
     this._commandLines.add(this._currentCommandLine);
     this._currentCommandLine = CommandLine(
-      currentDir: this._slashless(this._toShortPath(this._currentDir)),
+      currentDir: Utils.slashless(Utils.toShortPath(this._currentDir)),
       stdin: "",
       stdout: "",
     );
-  }
-
-  static String _shortHomeDirPath = "~/";
-  static String _fullHomeDirPath = "/home/acannie/";
-
-  // 短縮パスをフルパスに変換
-  String _toFullPath(String shortPath) {
-    if (shortPath.length < _shortHomeDirPath.length) {
-      return shortPath;
-    }
-    if (shortPath.substring(0, _shortHomeDirPath.length) != _shortHomeDirPath) {
-      return shortPath;
-    }
-    return _fullHomeDirPath + shortPath.substring(_shortHomeDirPath.length);
-  }
-
-  // フルパスを短縮パスに変換
-  String _toShortPath(String fullPath) {
-    if (fullPath.length < _fullHomeDirPath.length) {
-      return fullPath;
-    }
-    if (fullPath.substring(0, _fullHomeDirPath.length) != _fullHomeDirPath) {
-      return fullPath;
-    }
-    return _shortHomeDirPath + fullPath.substring(_fullHomeDirPath.length);
-  }
-
-  // パスの末尾のスラッシュを除去
-  String _slashless(String path) {
-    if (path.isEmpty || path.length == 1) {
-      return path;
-    }
-    if (!path.endsWith("/")) {
-      return path;
-    }
-    return path.substring(0, path.length - 1);
-  }
-
-  // パスの末尾にスラッシュを追加
-  String _addSlash(String path) {
-    if (path.endsWith("/")) {
-      return path;
-    }
-    return path + "/";
-  }
-
-  // 標準出力末尾の \n を除去
-  void _deleteNewLine() {
-    String stdout = this._currentCommandLine.stdout;
-    if (!stdout.endsWith("\n")) {
-      return;
-    }
-    this._currentCommandLine.stdout = stdout.substring(0, stdout.length - 1);
   }
 
   // *********************************
