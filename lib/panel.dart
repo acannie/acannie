@@ -1,8 +1,10 @@
+import 'package:acannie/powershell.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'layout.dart';
 import 'controller.dart';
+import 'ubuntu.dart';
 import 'ubuntu_controller.dart';
 
 class Panel extends StatelessWidget {
@@ -13,8 +15,30 @@ class Panel extends StatelessWidget {
     final UbuntuController _terminalController =
         Provider.of<UbuntuController>(context);
 
+    List<TerminalContent> terminalContents = [
+      TerminalContent(
+        title: "TERMINAL",
+        content: () {
+          if (_controller.wslMode) {
+            return Ubuntu();
+          }
+          return PowerShell();
+        }(),
+      ),
+      TerminalContent(
+        title: "DEBUG CONSOLE",
+        content: Text("Coming Soon!", style: TextStyle(color: Colors.white)),
+      ),
+      TerminalContent(
+          title: "PROBLEMS",
+          content: Text("Coming Soon!", style: TextStyle(color: Colors.white))),
+      TerminalContent(
+          title: "OUTPUT",
+          content: Text("Coming Soon!", style: TextStyle(color: Colors.white))),
+    ];
+
     return DefaultTabController(
-      length: _controller.terminalContents.length,
+      length: terminalContents.length,
       child: Builder(
         builder: (BuildContext context) {
           return Column(
@@ -47,7 +71,7 @@ class Panel extends StatelessWidget {
                           isScrollable: true,
                           tabs: [
                             for (TerminalContent terminalContent
-                                in _controller.terminalContents)
+                                in terminalContents)
                               Tab(
                                 child: Row(
                                   children: [
@@ -180,8 +204,7 @@ class Panel extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: <Widget>[
-                    for (TerminalContent terminalContent
-                        in _controller.terminalContents)
+                    for (TerminalContent terminalContent in terminalContents)
                       Container(
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 10),

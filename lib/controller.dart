@@ -88,23 +88,6 @@ class AcannieController with ChangeNotifier {
     ),
   ];
 
-  List<TerminalContent> terminalContents = [
-    TerminalContent(
-      title: "TERMINAL",
-      content: Ubuntu(),
-    ),
-    TerminalContent(
-      title: "DEBUG CONSOLE",
-      content: Text("Coming Soon!", style: TextStyle(color: Colors.white)),
-    ),
-    TerminalContent(
-        title: "PROBLEMS",
-        content: Text("Coming Soon!", style: TextStyle(color: Colors.white))),
-    TerminalContent(
-        title: "OUTPUT",
-        content: Text("Coming Soon!", style: TextStyle(color: Colors.white))),
-  ];
-
   // *********************************
   // * 変数                          *
   // *********************************
